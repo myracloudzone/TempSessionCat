@@ -1,7 +1,4 @@
-import { CheckInModuleComponent } from './modules/checkin/checkin-module';
-import { RegistrationModuleComponent } from './modules/registration/registration-module';
 import { SharedModule } from './modules/shared/module/shared.module';
-import { EmailModuleComponent } from './modules/email/email-module';
 import { NavbarComponent } from './modules/navbar/navbar.component';
 import { HttpModule } from '@angular/http';
 import { NotificationServiceComponent } from './commonUtils/Services/NotificationService/notificationService.component';
@@ -26,10 +23,7 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
     SharedModule,
     LoginModuleComponent,
     HomeModuleComponent,
-    // RegistrationModuleComponent,
-    // EmailModuleComponent,
-    // CheckInModuleComponent,
-    Ng4LoadingSpinnerModule.forRoot(),
+    Ng4LoadingSpinnerModule,
     RouterModule.forRoot([
       { path: '**', redirectTo: 'home' }
     ])
