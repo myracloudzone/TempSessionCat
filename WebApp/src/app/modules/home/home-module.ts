@@ -4,7 +4,6 @@ import { GlobalVariableService } from '../../commonUtils/Services/GlobalVariable
 import { Http, HttpModule } from '@angular/http';
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home-routing.module';
-import { NotificationServiceComponent } from '../../commonUtils/Services/NotificationService/notificationService.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { providers } from 'ng2-dnd';
 import { FormsModule } from '@angular/forms';

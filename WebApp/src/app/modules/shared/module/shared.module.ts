@@ -27,14 +27,13 @@ import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawe
         BrowserModule,
         ReactiveFormsModule,
         JsonpModule,
-        SimpleNotificationsModule.forRoot(),
         NgSpinKitModule,
         BrowserAnimationsModule,
         Angular2FontawesomeModule
     ],
     providers: [],
     exports: [
-        NavbarComponent, FormsModule, HttpModule, SimpleNotificationsModule, NgSpinKitModule, BrowserAnimationsModule, NgbModule,
+        NavbarComponent, FormsModule, HttpModule,  NgSpinKitModule, BrowserAnimationsModule, NgbModule,
         DropBoxDirective,
         GoogleDriveDirective,
         BrowserModule,

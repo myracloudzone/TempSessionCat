@@ -1,7 +1,6 @@
 import { SharedModule } from './modules/shared/module/shared.module';
 import { NavbarComponent } from './modules/navbar/navbar.component';
 import { HttpModule } from '@angular/http';
-import { NotificationServiceComponent } from './commonUtils/Services/NotificationService/notificationService.component';
 import { HomeModuleComponent } from './modules/home/home-module';
 import { FormsModule } from '@angular/forms';
 import { LoginRoutingModule } from './modules/login/login-routing.module';
@@ -17,7 +16,6 @@ import { AppComponent } from './app.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NotificationServiceComponent,
   ],
   imports: [
     SharedModule,
@@ -28,7 +26,7 @@ import { AppComponent } from './app.component';
       { path: '**', redirectTo: 'home' }
     ])
   ],
-  providers: [NotificationServiceComponent],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
