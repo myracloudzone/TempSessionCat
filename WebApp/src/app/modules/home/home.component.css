@@ -120,4 +120,17 @@ body {
     float: left;
     margin-right: 10px;
 }
+.separator {
+    border-bottom: 3px solid #DDD;
+}
+.mt5 {
+    margin-top: 5px;
+}
+.subHeading {
+    font-weight: 500 !important;
+    font-size:  15px !important;
+}
+.mt10 {
+    margin-top: 10px;
+}
 

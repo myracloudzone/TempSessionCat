@@ -19,15 +19,15 @@ export class HomeComponent implements OnInit {
   checkboxFlag = false;
   currentSpeaker = {};
 
-  constructor(private dataService: DataService, private spinnerService: Ng4LoadingSpinnerService, private modalService: NgbModal) {
-
+  constructor(private dataService: DataService, private modalService: NgbModal) {
+    //  private spinnerService: Ng4LoadingSpinnerService,
   }
 
   openSpeaker(content, speaker) {
     this.currentSpeaker = speaker;
     console.log(speaker)
     this.modalService.open(content, { size: 'lg'}).result.then((result) => {
-      
+       
     }, (reason) => {
       
     });
@@ -200,10 +200,10 @@ export class HomeComponent implements OnInit {
   };
 
   getSessionData() {
-    this.spinnerService.show();
+    // this.spinnerService.show();
     this.dataService.getData(this.filterArrayObject).subscribe(resp => {
       setTimeout(()=>{
-        this.spinnerService.hide();
+        // this.spinnerService.hide();
         this.sessionData = resp.body['data'];
       },1000);
     });

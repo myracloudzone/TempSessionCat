@@ -56,7 +56,7 @@
        </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+        <button type="button" class="btn btn btn-blue btn-outline-dark" (click)="c('Close click')">Close</button>
     </div>
 </ng-template>
 <button (click)="toggleSpinner()">Toggle</button>  
@@ -144,14 +144,36 @@
                                                 <div><i [ngClass]="(data.isFav == null || data.isFav == false) ? 'fa fa-star-o cursor-pointer pull-right fav' : 'fa fa-star   cursor-pointer  fav pull-right'" (click)="data.isFav = !data.isFav"><span class="duration">{{data.duration}} Minutes</span></i> </div>
                                                 <!--  -->
                                                 <p class="mb0 text-muted">{{data.startTime | date : 'dd/mm/yyyy hh:mm:ss'}} | {{data.endTime | date : 'dd/mm/yyyy hh:mm:ss'}}</p>
-                                                <p class="mb0" *ngIf="data.showDetails"><b>SPEAKERS</b></p>
+                                                <p class="mb0 subHeading" style="margin-bottom: 5px !important; margin-top: 5px !important;" *ngIf="data.showDetails">{{data.description}}</p>
                                                 <div *ngIf="data.showDetails">
-                                                    <span class="mb0" *ngFor="let speaker of data.speakers"><span class="speakerName" (click)="openSpeaker(headerPicker, speaker)">{{speaker.speakerFName}} {{speaker.speakerLName}}</span> |</span>
-                                                    <p class="mb0">{{data.description}}</p>
-                                                    <p class="mb0"><b>Session Type:</b> {{data.typeName}}</p>
-                                                    <p class="mb0"><b>Session Location:</b> {{data.locationName}}</p>
-                                                    <p class="mb0"><b>Session Track:</b> {{data.trackName}}</p>
-                                                    <p class="mb0"><b>Session Status:</b> {{data.statusName}}</p>
+                                                    <div class="col-sm-12 pl0 pr0">
+                                                        <p class="mb0 separator subHeading" *ngIf="data.showDetails"><b>SPEAKERS</b></p>
+                                                        <span class="mb0" *ngFor="let speaker of data.speakers"><span class="speakerName" (click)="openSpeaker(headerPicker, speaker)">{{speaker.speakerFName}} {{speaker.speakerLName}}</span> |</span>
+                                                    </div>
+                                                    <p class="mb0 mt10 subHeading"><b>Session Type:</b> {{data.typeName}}</p>
+                                                    <p class="mb0 mt10 subHeading"><b>Session Location:</b> {{data.locationName}}</p>
+                                                    <p class="mb0 mt10 subHeading"><b>Session Track:</b> {{data.trackName}}</p>
+                                                    <p class=" mt10 subHeading" style="padding-bottom : 10px;"><b>Session Status:</b> {{data.statusName}}</p>
+                                                    <!-- <p class="mb0 separator"><b>Description</b></p>
+                                                    <div class="col-sm-12 pl0 pr0">
+                                                        <p class="mb0">{{data.description}}</p>
+                                                    </div>
+                                                    <p class="mb0 separator"><b>Session Type</b></p>
+                                                    <div class="col-sm-12 pl0 pr0">
+                                                        <p class="mb0 separator">{{data.typeName}}</p>  
+                                                    </div>
+                                                    <p class="mb0 separator"><b>Session Location</b></p>
+                                                    <div class="col-sm-12 pl0 pr0">
+                                                        <p class="mb0 separator">{{data.locationName}}</p>
+                                                    </div>
+                                                    <p class="mb0 separator"><b>Session Track</b></p>
+                                                    <div class="col-sm-12 pl0 pr0">
+                                                        <p class="mb0 separator">{{data.trackName}}</p>    
+                                                    </div>
+                                                    <p class="mb0 separator"><b>Session Status</b></p>
+                                                    <div class="col-sm-12 pl0 pr0">
+                                                        <p class="mb0 separator">{{data.statusName}}</p>    
+                                                    </div> -->
                                                 </div>
                                             </div>
                                             <!-- <hr size="30"> -->

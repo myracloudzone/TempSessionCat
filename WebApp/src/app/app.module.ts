@@ -12,7 +12,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { AppComponent } from './app.component';
-import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+// import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,7 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
     SharedModule,
     LoginModuleComponent,
     HomeModuleComponent,
-    Ng4LoadingSpinnerModule,
+    // Ng4LoadingSpinnerModule.forRoot(),
     RouterModule.forRoot([
       { path: '**', redirectTo: 'home' }
     ])
