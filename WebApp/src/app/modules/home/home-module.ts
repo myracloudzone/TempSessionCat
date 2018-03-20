@@ -18,19 +18,19 @@ import { DataService } from './home-service';
     imports: [
       HomeRoutingModule,
       SharedModule,
-      TranslateModule.forRoot({
-        provide: TranslateLoader,
-        useFactory: (http: Http) => new TranslateStaticLoader(http,'/assets/i18n/', '.json'),
-        deps: [Http]
-      })
+      // TranslateModule.forRoot({
+      //   provide: TranslateLoader,
+      //   useFactory: (http: Http) => new TranslateStaticLoader(http,'/assets/i18n/', '.json'),
+      //   deps: [Http]
+      // })
     ],
     declarations: [
-      HomeComponent
+      HomeComponent 
     ],
     providers: [DataService]
   })
   export class HomeModuleComponent {
     constructor(translate: TranslateService) {
-      translate.use(GlobalVariableService.appGenericName+'-'+GlobalVariableService.appLanguage);
+      // translate.use(GlobalVariableService.appGenericName+'-'+GlobalVariableService.appLanguage);
   }
 }
