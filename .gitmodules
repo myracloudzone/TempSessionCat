@@ -1,3 +1,6 @@
 [submodule "WebAPP"]
 	path = WebAPP
 	url = /Users/infoobjects/Projects/SessionCat/WebAPP
+[submodule "WebAPP1"]
+	path = WebAPP1
+	url = /Users/infoobjects/Projects/SessionCat/WebAPP1
