@@ -1,0 +1,13 @@
+.wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.scrollToggle {
+    position: absolute;
+    right: 15px;
+    margin-top: -5px;
+}
+.nameIndex {
+    color: #07234e;
+    font-weight: 500;
+}

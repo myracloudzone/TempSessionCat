@@ -1,0 +1,123 @@
+body {
+    font-weight: 300 !important;   
+}
+.tCenter {
+    text-align: center;
+}
+.bg-color-blue {
+    background-color: #0b2958;
+}
+.color-white {
+    color: #fff;
+}
+.pl0 {
+    padding-left: 0px;
+}
+.pr0 {
+    padding-right: 0px;
+}
+.plr0 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.plr10 {
+    padding-left: 10px !important;
+    padding-right: 10px  !important;
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+.fw300 {
+    font-weight: 300;
+}
+.fw400 {
+    font-weight: 400;
+}
+.regular {
+    font-weight: 500;
+}
+.sessionBox {
+    /* border-left: 5px solid red; */
+    background: #f2f2f2;
+    margin-bottom: 5px;
+}  
+.modal-header   {
+    padding-top: 11px !important;
+    padding-bottom:11px !important;
+}
+.modal-footer   {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+.filter-block {
+    /* min-height : calc(100vh - 400px); */
+    min-height: 400px;
+    max-height: calc(100vh - 125px);
+    overflow: auto;
+    padding-right: 10px;
+    padding-left: 15px;
+}
+.sessionDataBlock {
+    max-height: calc(100vh - 215px);
+    overflow: auto;
+}
+.fs13 {
+    font-size: 13px;
+}
+.mb0 {
+    margin-bottom: 0px !important;
+}
+.speakerName {
+    font-weight: 700;
+    color: #01748e;
+}
+#page-content-wrapper {
+    padding-top: 0px !important;
+}
+.custom-control-indicator{
+    width: 15px !important;
+    height: 15px !important;
+}
+.color-blue {
+    color : #0b2a57;
+}
+.fav {
+    font-size: 18px;
+    margin-top: -10px;
+}
+.txt:hover {
+    text-decoration: underline;
+    /* color: red; */
+}
+.clearAll {
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+.idcard {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 100%;
+}
+
+.idcard:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.idcontainer {
+    padding: 2px 16px;
+}
+.speakerSessionList {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border: 2px solid #cdcdcd;
+    background: #ddd;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+.duration {
+    float: left;
+    margin-right: 10px;
+}
+

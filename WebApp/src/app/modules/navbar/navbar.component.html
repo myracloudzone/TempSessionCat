@@ -1,0 +1,73 @@
+<!--  -->
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#"> <img alt="Certain" style="height: 30px;" [src]="certainLogoPath"/></a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+       <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+       </ul>
+       <form class="form-inline my-2 my-lg-0">
+          <ul class="nav navbar-nav navbar-right">
+             <!-- <li class="nav-item"><a href="#" class="color-white">My Template</a></li>-->
+             <li class="nav-item"><a href="#" class="color-white">Session Sections</a></li> 
+             <!-- <li class="nav-item"><a href="#" class="color-white">Session Sections<span class="fa fa-plus-circle"></span></a></li> -->
+             <li class="dropdown">
+                <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#"><img alt=" " [src]="userPath" class="user"></a>
+                <ul class="userDropDown dropdown-menu ">
+                    <li class=""><a href="#"><i class="fa fa-pencil-square-o"></i> Edit Profile</a></li>
+                    <li class="divider" role="separator"></li>
+                    <li><a href="#"><i class="fa fa-power-off clr-red"></i> Logout</a></li>
+                </ul>  
+             </li>
+          </ul>
+       </form>
+    </div>
+ </nav>
+ <!-- <div class="filters">
+    <div class="container-fluid">
+       <div class="row">
+          <div class="col-sm-5">&nbsp;</div>
+          <div class="col-sm-4">
+             <div class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Marketo Nation Marketing Summit 2017</a>
+                <ul class="dropdown-menu">
+                   <li><a href="#">Hackathon 2017</a></li>
+                   <li><a href="#">Dev Meeting 2017</a></li>
+                   <li role="separator" class="divider"></li>
+                   <li><a href="#">Annual Financial Seminar</a></li>
+                </ul>
+             </div>
+          </div>
+          <div class="col-sm-3">
+             <div class="col-sm-12">
+                <a class="btn btn-blue"><span class="fa fa-search color-white fa-lg"></span></a>
+                <a class="btn btn-blue"><span class="fa fa-ellipsis-h color-white fa-lg"></span></a>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div> -->
+ <div>
+    <div id="side-panel" class="visible">
+       <div id="sidebar-wrapper" class="visible">
+          <div class="nav-item" id="sidebar-btn" (click)="toggleSideBar()"> <i class="fa fa-bars" aria-hidden="true"></i> </div>
+          <ul class="sidebar-nav">
+             <!-- <li class="nav-item"><a class="nav-link"><span><i class="fa fa-calendar-minus-o"></i></span><span>Metrics</span></a></li>
+             <li class="nav-item"><a href="/registration" class="nav-link bottomLine"><span><i class="fa fa-vcard"></i></span><span>Registrations</span></a></li>
+             <li class="nav-item"><a href="/home" class="nav-link"><span><i class="fa fa-columns"></i></span><span>Event Site</span></a></li>
+             <li class="nav-item"><a href="/email" class="nav-link"><span><i class="fa fa-envelope-o"></i></span><span>Emails</span></a></li>
+             <li class="nav-item"><a href="/checkin" class="nav-link"><span><i class="fa fa-check-circle"></i></span><span>Check-in</span></a></li>
+             <li class="nav-item"><a href="/home" class="nav-link"><span><i class="fa fa-id-badge"></i></span><span>Badging</span></a></li> -->
+             <li class="nav-item"><a class="nav-link"><span><i class="fa fa-calendar-minus-o"></i></span><span>Metrics</span></a></li>
+             <li class="nav-item"><a href="/home" class="nav-link bottomLine"><span><i class="fa fa-vcard"></i></span><span>Registrations</span></a></li>
+             <li class="nav-item"><a href="/home" class="nav-link"><span><i class="fa fa-columns"></i></span><span>Event Site</span></a></li>
+             <li class="nav-item"><a href="/home" class="nav-link"><span><i class="fa fa-envelope-o"></i></span><span>Emails</span></a></li>
+             <li class="nav-item"><a href="/home" class="nav-link"><span><i class="fa fa-check-circle"></i></span><span>Check-in</span></a></li>
+             <li class="nav-item"><a href="/registration" class="nav-link"><span><i class="fa fa-id-badge"></i></span><span>Badging</span></a></li>
+          </ul>
+       </div>
+       <!-- end sidebar --> 
+       <!-- main content -->
+    </div>
+ </div>

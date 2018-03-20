@@ -1,0 +1,152 @@
+<!-- Table Headers Modal -->
+<ng-template #headerPicker let-c="close" let-d="dismiss">
+    <div class="modal-header">
+       <h4 class="modal-title">Columns</h4>
+       <!-- <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+       <span aria-hidden="true">&times;</span>
+       </button> -->
+    </div>
+    <div class="modal-body">
+        <div class="col-sm-12" *ngIf="modals.columnModalLoading">
+            <sk-wandering-cubes></sk-wandering-cubes>       
+        </div>  
+        <div class="row" *ngIf="!modals.columnModalLoading">
+            <div class="col-sm-4 p10" *ngFor="let headerOption of headerOptions">
+                <label class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" (click)="setHeadersConfig(headerOption)" [checked]="headers.indexOf(headerOption) >= 0">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">&nbsp;&nbsp;&nbsp;{{headerOption}}</span>
+                </label>
+            </div>
+        </div>    
+    </div>
+    <div class="modal-footer">
+       <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+    </div>
+ </ng-template>
+ <!--  -->
+<app-navbar></app-navbar>
+<div id="side-panel" class="visible">
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-10 col-sm-12">
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-panel active" id="reg">
+                            <div class="card">
+                                <div class="card-block">
+                                    <div class="row">
+                                        <div class="col-sm-9">
+                                            <h3 class="card-title">Event Registrations</h3>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <div class="pull-right">
+                                                <label class="switch">
+                                                    <input type="checkbox">
+                                                    <span class="slider round"></span>
+                                                  </label>
+                                               
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <button class="btn btn-default">Site Link</button>
+                                        </div>  
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            <div class="device-margin">
+                                                <input type="text" class="form-control search-input" placeholder="Search Attendees">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="device-margin">
+                                                <button class="btn btn-blue" type="submit">Search</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-1">
+                                            <div class="dropdown">
+                                                <a href="#" class="dropdown-toggle dropdown-toggle-noArrow" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                    <span class="fa fa-plus-circle fa-2x clr-cyan"></span>
+                                                    <span class="fa fa-ellipsis-h fa-lg"></span>
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="#">Import</a></li>
+                                                    <li><a href="#">Export</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1">
+                                          <div>
+                                            <a (click)="open(headerPicker)"><i class="fa fa-th-list fa-2x"></i></a>
+                                          </div>
+                                        </div>  
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mt20">
+                                <div class="card-block">
+                                    <div class="scrollToggle"><a><i class="fa  fa-arrow-left fa-lg" (click)="slideTable('left')" ></i></a><a class="ml10"><i class="fa fa-arrow-right fa-lg" (click)="slideTable('right')"></i></a></div>
+                                    <div class="table-responsive wrapper">
+                                        <table class="table table-hover table-reg"> 
+                                          <!-- Add this class table-reg -->
+                                            <thead>
+                                                <tr class="dnd-moved">
+                                                    <th  draggable="false">
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" (click)="toggleSelectAllReg()" [(checked)]="booleans.allRegSelected">
+                                                            <span class="custom-control-indicator"></span>
+                                                            <span class="custom-control-description"></span>
+                                                        </label>
+                                                    </th>
+                                                    <th *ngFor="let header of headers" draggable="true" nowrap>{{header}} <a href="#"><i class="fa fa-sort-down"></i></a></th>
+                                                </tr>
+                                            </thead>
+                                           <tbody> 
+                                              <tr *ngFor="let reg of regData" class="dnd-moved">
+                                                  <td>
+                                                      <label class="custom-control custom-checkbox">
+                                                          <input type="checkbox" class="custom-control-input" [checked]="booleans.allRegSelected">
+                                                          <span class="custom-control-indicator"></span>
+                                                          <span class="custom-control-description"></span>
+                                                      </label>
+                                                      <!-- <div class="pull-left mr10">
+                                                          <img class="reg-user" src="images/user.jpg" alt=" ">
+                                                      </div> -->
+                                                    <div class="clearfix"></div>
+                                                  </td>
+                                                  <td *ngFor="let header of headers" [ngClass]="{'nameIndex': header === 'Name'}">{{reg[header]}}</td>
+                                                <td align="right">
+                                                      <div class="cover">
+                                                          <span class="fa fa-envelope-o fa-lg mr10"></span>
+                                                          <span class="fa fa-mobile-phone fa-lg"></span>
+                                                      </div>
+                                                  </td>
+                                                </tr>
+                                              </tbody>  
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <!-- /#reg -->
+                    </div>
+                </div>
+                <div class="col-md-10 col-sm-12">
+                    <ngb-pagination class="pull-right mt10" [collectionSize]="totalItems" [pageSize]="itemsPerPage" [(page)]="page" [maxSize]="7" [rotate]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+  
