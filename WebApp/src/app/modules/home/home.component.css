@@ -141,6 +141,9 @@ body {
     font-weight: 500 !important;
     font-size:  15px !important;
 }
+.pb3 {
+    padding-bottom: 3px;
+}
 .mt10 {
     margin-top: 10px;
 }
@@ -163,5 +166,15 @@ hr {
     color: #0b2a57;
     font-weight: 500;
     font-size: 18px;
+}
+.dropLink {
+    font-size: 20px;
+    position: relative;
+}
+.pl20{
+    padding-left: 20px;
+}
+.mb5 {
+    margin-bottom: 5px;
 }
 

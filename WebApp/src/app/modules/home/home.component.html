@@ -97,6 +97,10 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- <div class="card mt10">
+                                <div class="card-block sessionDataBlock">
+                                </div>
+                            </div>             -->
                             <div class="card mt10">
                                 <div class="card-block sessionDataBlock">
                                     <div class="row" *ngIf="(sessionData == null || sessionData.length == 0) && !listLoading">
@@ -108,7 +112,7 @@
                                         <div class="col-sm-12 plr10" *ngFor="let data of sessionData">
                                             <div class="col-sm-12 pl0 pr0 plr10 sessionBox fw300" [ngStyle]="{'border-left': ('7px solid '+ data.trackColor)}">
                                                 <div style="width : 80%" class="ellipses">
-                                                    <a class="cursor-pointer regular-strong" style="width : 100%" ngbTooltip="{{data.name}}" placement="bottom" (click)="data.showDetails = !data.showDetails"><i [ngClass]="(data.showDetails == null || data.showDetails == false) ? 'fa fa-chevron-circle-right color-blue' : 'fa fa-chevron-circle-down color-blue'" ></i> {{data.name}} [{{data.code}}]</a>  
+                                                    <a class="cursor-pointer regular-strong" style="width : 100%" ngbTooltip="{{data.name}}" placement="bottom" (click)="data.showDetails = !data.showDetails"><i [ngClass]="(data.showDetails == null || data.showDetails == false) ? 'fa fa-chevron-circle-right dropLink color-blue' : 'fa fa-chevron-circle-down dropLink color-blue'" ></i> {{data.name}} [{{data.code}}]</a>  
                                                 </div>
                                                 <div><i [ngClass]="(data.isFav == null || data.isFav == false) ? 'fa fa-star-o cursor-pointer pull-right fav' : 'fa fa-star   cursor-pointer  fav pull-right'" (click)="data.isFav = !data.isFav">
                                                         <span class="duration">
@@ -120,12 +124,12 @@
                                                                 </div>
                                                               </div>    
                                                 </span></i> </div>
-                                                <!--  -->
-                                                <p class="mb0 text-muted">{{getStartEndDate(data.startTime, data.endTime)}} <span class="pipe">|</span> <span>{{data.locationName}}</span></p>
-                                                <p class="mb0 subHeading" style="margin-bottom: 5px !important; margin-top: 5px !important;" *ngIf="data.showDetails">{{data.description}}</p>
-                                                <div *ngIf="data.showDetails">
+                                                <!--  --> 
+                                                <p class="mb0 text-muted pl20"><i class="fa fa-clock-o">&nbsp;</i>{{getStartEndDate(data.startTime, data.endTime)}} <span class="pipe">|</span><span>&nbsp;<i class="fa fa-map-marker">&nbsp;</i>{{data.locationName}}</span></p>
+                                                <p class="mb0 subHeading pl20" style="margin-bottom: 5px !important; margin-top: 5px !important;" *ngIf="data.showDetails">{{data.description}}</p>
+                                                <div *ngIf="data.showDetails" class="pl20">
                                                     <div class="col-sm-12 pl0 pr0">
-                                                        <p class="mb0 separator subHeading" *ngIf="data.showDetails"><b>SPEAKERS</b></p>
+                                                        <p class="mb5 separator pb3 subHeading" *ngIf="data.showDetails"><i class="fa fa-users">&nbsp;</i><b>SPEAKERS</b></p>
                                                         <span class="mb0" *ngFor="let speaker of data.speakers"><span class="speakerName" (click)="openSpeaker(headerPicker, speaker)">{{speaker.speakerFName}} {{speaker.speakerLName}}</span> |</span>
                                                     </div>
                                                     <p class="mb0 mt10 subHeading"><b>Type:</b> {{data.typeName}}</p>
