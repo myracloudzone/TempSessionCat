@@ -73,17 +73,18 @@ body {
     background-color: red;
     background-image: none;
 }
-.footer {
+.footer {  
     position: fixed;
     left: 0px;
     bottom: 0px;
     z-index: 2;
-    height: 30px;
+    height: 25px;
     width: 100%;
-    background: #000;
+    font-size: 14px;
+    background: #061733;
     color: #fff;
-    padding: 5px;
-    text-align: center;
+    padding: 1px;
+text-align: center;
  }
 
  .switch {
