@@ -3,9 +3,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {URLSearchParams} from '@angular/http';
+declare var $: any;
 
 @Injectable()
 export class DataService {
+    url : string = location.protocol+'//'+location.hostname+':4300'; 
     constructor(private http: HttpClient) {
 
     }
@@ -13,31 +15,31 @@ export class DataService {
     getData(ids) {
         let params = new URLSearchParams();
         params.set('request', JSON.stringify(ids));
-        return this.http.get('http://127.0.0.1:4300/sessions'+ '?' + params.toString(), { observe: 'response' });
+        return this.http.get(this.url+'/sessions'+ '?' + params.toString(), { observe: 'response' });
     }
 
     getLevels() {
-        return this.http.get('http://127.0.0.1:4300/levels', { observe: 'response' });
+        return this.http.get(this.url+'/levels', { observe: 'response' });
     }
 
     getLocations() {
-        return this.http.get('http://127.0.0.1:4300/locations', { observe: 'response' });
+        return this.http.get(this.url + '/locations', { observe: 'response' });
     }
 
     getStatus() {
-        return this.http.get('http://127.0.0.1:4300/status', { observe: 'response' });
+        return this.http.get(this.url+'/status', { observe: 'response' });
     }
 
 
     getTags() {
-        return this.http.get('http://127.0.0.1:4300/tags', { observe: 'response' });
+        return this.http.get(this.url+'/tags', { observe: 'response' });
     }
 
     getTracks() {
-        return this.http.get('http://127.0.0.1:4300/tracks', { observe: 'response' });
+        return this.http.get(this.url+'/tracks', { observe: 'response' });
     }
 
     getTypes() {
-        return this.http.get('http://127.0.0.1:4300/types', { observe: 'response' });
+        return this.http.get(this.url+'/types', { observe: 'response' });
     }
 }
