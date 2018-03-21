@@ -130,8 +130,7 @@ export class HomeComponent implements OnInit {
         return datePipe.transform(start, 'yyyy-MM-dd').toString() + '  ' +
                 datePipe.transform(start, 'HH:mm').toString() + ' - ' + datePipe.transform(end, 'HH:mm').toString();
     } else {
-
-      // start = datePipe.transform(start, 'yyyy-MM-dd').toString();
+      return datePipe.transform(start, 'yyyy-MM-dd HH:mm').toString() + ' - ' + datePipe.transform(end, 'yyyy-MM-dd HH:mm').toString();
     }
 
   }
