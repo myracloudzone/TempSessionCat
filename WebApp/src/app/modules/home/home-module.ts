@@ -30,7 +30,7 @@ import { DataService } from './home-service';
     providers: [DataService]
   })
   export class HomeModuleComponent {
-    constructor(translate: TranslateService) {
+    constructor() {
       // translate.use(GlobalVariableService.appGenericName+'-'+GlobalVariableService.appLanguage);
   }
 }
