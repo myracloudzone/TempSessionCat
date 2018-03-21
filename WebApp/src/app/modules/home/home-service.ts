@@ -22,8 +22,18 @@ export class DataService {
         return this.http.get(this.url+'/levels', { observe: 'response' });
     }
 
+    getDistinctDates() {
+        return this.http.get(this.url+'/distinctDates', { observe: 'response' });
+    }
+
     getLocations() {
         return this.http.get(this.url + '/locations', { observe: 'response' });
+    }
+
+    getSpeakerSesssion(id) {
+        let params = new URLSearchParams();
+        params.set('speakerId', id);
+        return this.http.get(this.url + '/speakerSesssion'+ '?' + params.toString(), { observe: 'response' });
     }
 
     getStatus() {

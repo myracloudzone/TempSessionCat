@@ -3,6 +3,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 declare var $: any;
 import { DataService } from './home-service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,9 @@ export class HomeComponent implements OnInit {
   filterArrayObject = {};
   checkboxFlag = false;
   currentSpeaker = {};
+  currentSpeakerSession = [];
+  maxDuration = 0;
+  listLoading = true;
 
   constructor(private dataService: DataService, private spinnerService: Ng4LoadingSpinnerService, private modalService: NgbModal) {
     //  private spinnerService: Ng4LoadingSpinnerService,
@@ -25,11 +29,17 @@ export class HomeComponent implements OnInit {
 
   openSpeaker(content, speaker) {
     this.currentSpeaker = speaker;
-    console.log(speaker)
-    this.modalService.open(content, { size: 'lg'}).result.then((result) => {
-       
-    }, (reason) => {
-      
+    console.log(speaker);
+    this.spinnerService.show();
+    this.dataService.getSpeakerSesssion(this.currentSpeaker['speakerId']).subscribe(resp => {
+      setTimeout(()=> {
+        this.spinnerService.hide();
+        this.currentSpeakerSession = resp.body['data'];
+        this.modalService.open(content, { size: 'lg'}).result.then((result) => {
+          
+        }, (reason) => {
+        });
+      },500);
     });
   }
 
@@ -112,68 +122,93 @@ export class HomeComponent implements OnInit {
     this.filterData();
   }
 
+  getStartEndDate(startTime, endTime) {
+    var start = new Date(startTime);
+    var end = new Date(endTime);
+    var datePipe = new DatePipe('en-US');
+    if(start.getDay() === end.getDay() && start.getMonth() === end.getMonth() && start.getFullYear() === end.getFullYear()) {
+        return datePipe.transform(start, 'yyyy-MM-dd').toString() + '  ' +
+                datePipe.transform(start, 'HH:mm').toString() + ' - ' + datePipe.transform(end, 'HH:mm').toString();
+    } else {
+
+      // start = datePipe.transform(start, 'yyyy-MM-dd').toString();
+    }
+
+  }
+
   setFilters() {
-    this.filters = [];
+    this.filters = [{}, {}, {}, {}, {}, {}, {}];
+    var count = 0;
     this.dataService.getLevels().subscribe(resp => {
       var tempData = {
-          name : 'Session Levels' ,
+          name : 'Levels' ,
           type : 'sessionLevel' ,
           optionsType : 'Checkbox',
           options : resp.body['data'],
-          showOptions : true
+          showOptions : false
         };
-        this.filters.push(tempData);
+        this.filters[1] =tempData;
     });
 
     this.dataService.getLocations().subscribe(resp => {
         var tempData = {
-          name : 'Session Location' ,
+          name : 'Location' ,
           type : 'sessionLocation' ,
           optionsType : 'Checkbox',
           options : resp.body['data'],
           showOptions : false
         };
-        this.filters.push(tempData);
+        this.filters[2] =tempData;
     });
     this.dataService.getStatus().subscribe(resp => {
       var tempData = {
-        name : 'Session Status' ,
+        name : 'Status' ,
         type : 'sessionStatus' ,
         optionsType : 'Checkbox',
         options : resp.body['data'],
         showOptions : false
       };
-      this.filters.push(tempData);
+      this.filters[3] = tempData;
     });
     this.dataService.getTags().subscribe(resp => {
       var tempData = {
-        name : 'Session Tags' ,
+        name : 'Tags' ,
         type : 'sessionTag' ,
         optionsType : 'Checkbox',
         options : resp.body['data'],
         showOptions : false
       };
-      this.filters.push(tempData);
+      this.filters[4] =tempData;
     });
     this.dataService.getTracks().subscribe(resp => {
       var tempData = {
-        name : 'Session Tracks' ,
+        name : 'Tracks' ,
         type : 'sessionTrack' ,
         optionsType : 'Checkbox',
         options : resp.body['data'],
         showOptions : false
       };
-      this.filters.push(tempData);
+      this.filters[5] =tempData;
     });
     this.dataService.getTypes().subscribe(resp => {
       var tempData = {
-        name : 'Session Types' ,
+        name : 'Types' ,
         type : 'sessionType' ,
         optionsType : 'Checkbox',
         options : resp.body['data'],
         showOptions : false
       };
-      this.filters.push(tempData);
+      this.filters[6] = tempData;
+    });
+    this.dataService.getDistinctDates().subscribe(resp => {
+      var tempData = {
+        name : 'Dates' ,
+        type : 'dates' ,
+        optionsType : 'Checkbox',
+        options : resp.body['data'],
+        showOptions : true
+      };
+      this.filters[0] =tempData;
     });
   };
 
@@ -190,23 +225,41 @@ export class HomeComponent implements OnInit {
     this.filterObject['sessionTag'] = {};
     this.filterObject['sessionTrack'] = {};
     this.filterObject['sessionType'] = {};
+    this.filterObject['dates'] = {};
     this.filterArrayObject['sessionLevel'] = [];
     this.filterArrayObject['sessionLocation'] = [];
     this.filterArrayObject['sessionStatus'] = [];
     this.filterArrayObject['sessionTag'] = [];
     this.filterArrayObject['sessionTrack'] = [];
     this.filterArrayObject['sessionType'] = [];
+    this.filterArrayObject['dates'] = [];
     this.filterArrayObject['term'] = '';
   };
 
   getSessionData() {
     this.spinnerService.show();
+    this.listLoading = true;
     this.dataService.getData(this.filterArrayObject).subscribe(resp => {
-      setTimeout(()=>{
+      setTimeout(()=> {
         this.spinnerService.hide();
         this.sessionData = resp.body['data'];
+        this.maxDuration = resp.body['maxDuration'];
+        this.listLoading = false;
       },1000);
     });
+  }
+
+  getHours(min) {
+    let h = parseInt(''+(min/60));
+    let m = min%60;
+    var t = h + 'h : '+m+'m';
+    return t;
+  }
+  getMinutes(min) {
+    // return 
+  }
+  getProgressmaxValue(min) {
+    return ((min/this.maxDuration)*100).toFixed(2)+'%';
   }
 
   ngOnInit() {

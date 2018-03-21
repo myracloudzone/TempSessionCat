@@ -19,38 +19,24 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-8">
-                <h4>Sessions:</h4>
-                <hr>
-                <div class="col-sm-12 pl0 pr0" style="max-height: 200px; overflow: auto;">
-                    <div class="col-sm-12 speakerSessionList">
-                            Session 1
-                    </div>
-                    <div class="col-sm-12 speakerSessionList">
-                        Session 2
-                    </div>
-                    <div class="col-sm-12 speakerSessionList">
-                        Session 3
-                    </div>
-                    <div class="col-sm-12 speakerSessionList">
-                        Session 4
-                    </div>
-                    <div class="col-sm-12 speakerSessionList">
-                        Session 5
-                    </div>
-                    <div class="col-sm-12 speakerSessionList">
-                        Session 6
-                    </div>
-                    <div class="col-sm-12 speakerSessionList">
-                        Session 7
-                    </div>
-                    <div class="col-sm-12 speakerSessionList">
-                        Session 8
-                    </div>
-                    <div class="col-sm-12 speakerSessionList">
-                        Session 9
-                    </div>
-                                    
+            <div class="col-sm-8" style="max-height: 270px; overflow: auto;">
+                <div class="col-sm-12 pl0 pr0">
+                        <h6>Bio:</h6>
+                        <hr>
+                        <p class="text-justify fs13">{{currentSpeaker.speakerBio}}</p>
+                </div>
+                <div class="col-sm-12 pl0 pr0">
+                    <h6>Sessions:</h6>
+                    <hr>
+                    <div class="col-sm-12 pl0 pr0"> 
+                        <div class="col-sm-12 speakerSessionList" *ngFor="let session of currentSpeakerSession" ngbTooltip="{{session.name}}">
+                            <div style="width:80%" class="ellipses" >
+                                {{session.name}} [{{session.code}}]
+                                
+                            </div>
+                            <span class="pull-right" style="position: relative; margin-top: -19px;"> {{session.startTime | date : 'dd/MM/yyyy'}}</span>
+                        </div>
+                    </div>  
                 </div>
             </div>
        </div>
@@ -66,30 +52,6 @@
 <div id="side-panel" class="visible">
     <div id="page-content-wrapper">
         <div class="container-fluid">
-            <!-- <div class="row">
-                <div class="col-sm-12">
-                    <div class="card">
-                        <div class="card-block">
-                            <div class="row">
-                                    <div class="col-sm-2">
-
-                                    </div>
-                                    <div class="col-sm-6">
-                                            <div class="device-margin">
-                                                <input type="text" class="form-control search-input" placeholder="Search Attendees">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-2">
-                                            <div class="device-margin">
-                                                <button class="btn btn-blue" type="submit">Search</button>
-                                            </div>
-                                        </div>
-                            </div>
-                            
-                        </div>
-                    </div> 
-                </div>    
-            </div>     -->
             <div class="row">
                 <div class="col-sm-2">
                     <div class="card">
@@ -101,7 +63,7 @@
                                 <div class="col-sm-12 pr0" *ngIf="filter.showOptions">
                                     <!-- <input type="checkbox"></input> -->
                                     <label class="custom-control custom-checkbox fs13 col-sm-12 fw300" *ngFor="let option of filter.options">
-                                            <input type="checkbox" class="custom-control-input" value="option.id" [(ngModel)]="filterObject[filter.type][option.id]" (change)="applyFilter(filter.type, option.id)">{{option.name}}
+                                            <input type="checkbox" class="custom-control-input" value="option.id" [(ngModel)]="filterObject[filter.type][option.id]" (change)="applyFilter(filter.type, option.id)"> <span class="track-clr-bx" *ngIf="filter.type == 'sessionTrack'" [ngStyle]="{'border-left': ('7px solid '+ option.color)}"></span>{{option.name}} 
                                             <span class="custom-control-indicator"></span>
                                             <span class="custom-control-description"></span>
                                     </label>
@@ -137,59 +99,45 @@
                             </div>
                             <div class="card mt10">
                                 <div class="card-block sessionDataBlock">
-                                    <div class="row">
+                                    <div class="row" *ngIf="(sessionData == null || sessionData.length == 0) && !listLoading">
+                                        <div class="col-sm-12">
+                                            <h6>No Record Found.</h6>
+                                        </div>
+                                    </div>    
+                                    <div class="row" *ngIf="sessionData != null && sessionData.length > 0">
                                         <div class="col-sm-12 plr10" *ngFor="let data of sessionData">
                                             <div class="col-sm-12 pl0 pr0 plr10 sessionBox fw300" [ngStyle]="{'border-left': ('7px solid '+ data.trackColor)}">
-                                                <a class="cursor-pointer regular" (click)="data.showDetails = !data.showDetails"><i [ngClass]="(data.showDetails == null || data.showDetails == false) ? 'fa fa-chevron-circle-right color-blue' : 'fa fa-chevron-circle-down color-blue'" ></i> {{data.name}} [{{data.code}}]</a>  
-                                                <div><i [ngClass]="(data.isFav == null || data.isFav == false) ? 'fa fa-star-o cursor-pointer pull-right fav' : 'fa fa-star   cursor-pointer  fav pull-right'" (click)="data.isFav = !data.isFav"><span class="duration">{{data.duration}} Minutes</span></i> </div>
+                                                <div style="width : 80%" class="ellipses">
+                                                    <a class="cursor-pointer regular-strong" style="width : 100%" ngbTooltip="{{data.name}}" placement="bottom" (click)="data.showDetails = !data.showDetails"><i [ngClass]="(data.showDetails == null || data.showDetails == false) ? 'fa fa-chevron-circle-right color-blue' : 'fa fa-chevron-circle-down color-blue'" ></i> {{data.name}} [{{data.code}}]</a>  
+                                                </div>
+                                                <div><i [ngClass]="(data.isFav == null || data.isFav == false) ? 'fa fa-star-o cursor-pointer pull-right fav' : 'fa fa-star   cursor-pointer  fav pull-right'" (click)="data.isFav = !data.isFav">
+                                                        <span class="duration">
+                                                            <!-- {{data.duration}} Minutes -->
+                                                        <div class="progress" style="width : 100px;">
+                                                                <div class="progress-bar progress-bar-success" ngbTooltip="{{getHours(data.duration)}}" role="progressbar"
+                                                                aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width': getProgressmaxValue(data.duration)}">
+                                                                    {{getProgressmaxValue(data.duration)}}
+                                                                </div>
+                                                              </div>    
+                                                </span></i> </div>
                                                 <!--  -->
-                                                <p class="mb0 text-muted">{{data.startTime | date : 'dd/mm/yyyy hh:mm:ss'}} | {{data.endTime | date : 'dd/mm/yyyy hh:mm:ss'}}</p>
+                                                <p class="mb0 text-muted">{{getStartEndDate(data.startTime, data.endTime)}} <span class="pipe">|</span> <span>{{data.locationName}}</span></p>
                                                 <p class="mb0 subHeading" style="margin-bottom: 5px !important; margin-top: 5px !important;" *ngIf="data.showDetails">{{data.description}}</p>
                                                 <div *ngIf="data.showDetails">
                                                     <div class="col-sm-12 pl0 pr0">
                                                         <p class="mb0 separator subHeading" *ngIf="data.showDetails"><b>SPEAKERS</b></p>
                                                         <span class="mb0" *ngFor="let speaker of data.speakers"><span class="speakerName" (click)="openSpeaker(headerPicker, speaker)">{{speaker.speakerFName}} {{speaker.speakerLName}}</span> |</span>
                                                     </div>
-                                                    <p class="mb0 mt10 subHeading"><b>Session Type:</b> {{data.typeName}}</p>
-                                                    <p class="mb0 mt10 subHeading"><b>Session Location:</b> {{data.locationName}}</p>
-                                                    <p class="mb0 mt10 subHeading"><b>Session Track:</b> {{data.trackName}}</p>
-                                                    <p class=" mt10 subHeading" style="padding-bottom : 10px;"><b>Session Status:</b> {{data.statusName}}</p>
-                                                    <!-- <p class="mb0 separator"><b>Description</b></p>
-                                                    <div class="col-sm-12 pl0 pr0">
-                                                        <p class="mb0">{{data.description}}</p>
-                                                    </div>
-                                                    <p class="mb0 separator"><b>Session Type</b></p>
-                                                    <div class="col-sm-12 pl0 pr0">
-                                                        <p class="mb0 separator">{{data.typeName}}</p>  
-                                                    </div>
-                                                    <p class="mb0 separator"><b>Session Location</b></p>
-                                                    <div class="col-sm-12 pl0 pr0">
-                                                        <p class="mb0 separator">{{data.locationName}}</p>
-                                                    </div>
-                                                    <p class="mb0 separator"><b>Session Track</b></p>
-                                                    <div class="col-sm-12 pl0 pr0">
-                                                        <p class="mb0 separator">{{data.trackName}}</p>    
-                                                    </div>
-                                                    <p class="mb0 separator"><b>Session Status</b></p>
-                                                    <div class="col-sm-12 pl0 pr0">
-                                                        <p class="mb0 separator">{{data.statusName}}</p>    
-                                                    </div> -->
+                                                    <p class="mb0 mt10 subHeading"><b>Type:</b> {{data.typeName}}</p>
+                                                    <!-- <p class="mb0 mt10 subHeading"><b>Location:</b> {{data.locationName}}</p> -->
+                                                    <p class="mb0 mt10 subHeading"><b>Track:</b> {{data.trackName}}</p>
+                                                    <p class=" mt10 subHeading"><b>Status:</b> {{data.statusName}}</p>
                                                 </div>
                                             </div>
-                                            <!-- <hr size="30"> -->
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="card mt10">
-                                <div class="card-block">
-                                    <div class="row">
-                                        
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div> -->
                         </div>
                     </div>
                     <div class="clearfix"></div>

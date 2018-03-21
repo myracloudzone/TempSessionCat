@@ -36,10 +36,18 @@ body {
 .regular {
     font-weight: 500;
 }
+.regular-strong {
+    font-weight: 600;
+}
+.progress {
+    background: #ddd !important;
+}
 .sessionBox {
     /* border-left: 5px solid red; */
     background: #f2f2f2;
     margin-bottom: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }  
 .modal-header   {
     padding-top: 11px !important;
@@ -132,5 +140,25 @@ body {
 }
 .mt10 {
     margin-top: 10px;
+}
+.track-clr-bx {
+    width: 10px;
+    border-left: 5px solid #000;
+    height: 15px;
+    margin-top: 3px;
+}
+hr {
+    margin-top: 0px !important;
+    margin-bottom: 2px !important;
+}
+.ellipses {
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.pipe {
+    color: #0b2a57;
+    font-weight: 500;
+    font-size: 18px;
 }
 
