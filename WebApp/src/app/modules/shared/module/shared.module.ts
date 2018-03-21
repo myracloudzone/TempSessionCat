@@ -23,13 +23,13 @@ import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawe
         FormsModule,
         HttpModule,
         HttpClientModule,
-        NgbModule.forRoot(),
         BrowserModule,
         ReactiveFormsModule,
         JsonpModule,
         NgSpinKitModule,
         BrowserAnimationsModule,
-        Angular2FontawesomeModule
+        Angular2FontawesomeModule,
+        NgbModule.forRoot()
     ],
     providers: [],
     exports: [
