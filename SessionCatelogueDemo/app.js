@@ -15,7 +15,7 @@ var connection  = require('express-myconnection');
 var mysql = require('mysql');
 
 // all environments
-app.set('port', process.env.PORT || 4300);
+app.set('port', process.env.PORT || 4200);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 //app.use(express.favicon());
@@ -67,6 +67,9 @@ app.get('/status', customers.status);
 app.get('/tags', customers.tags);
 app.get('/tracks', customers.tracks);
 app.get('/types', customers.types);
+app.get('/speakerSesssion', customers.speakerSesssion);
+app.get('/distinctDates', customers.distinctDates);
+
 
 
 app.use(app.router);

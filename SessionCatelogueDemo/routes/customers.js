@@ -4,6 +4,8 @@
  */
 
 var async = require('async');
+var moment = require('moment');
+var forEach = require('async-foreach').forEach;
 
 exports.list = function(req, res){
   console.log(req.query)
@@ -33,6 +35,30 @@ exports.list = function(req, res){
     if(querySearch.term != null && querySearch.term != '') {
         query = query + " and (s.name like '%"+querySearch.term+"%' or s.code like '%"+querySearch.term+"%'"
     }
+    if(querySearch.dates != null && querySearch.dates.length > 0) {
+        var q = " and ("
+        forEach(querySearch.dates, function(item, index, arr) {
+            var start = (new Date(item)).getTime();
+            var end = (new Date(item));
+            end.setHours(23);
+            end.setMinutes(59);
+            end.setSeconds(59);
+            end = end.getTime();
+            q = q + ' (s.startTime >= '+start+' and s.startTime <= '+end+') '
+            if(index != querySearch.dates.length -1) {
+                if(index == 0 && querySearch.dates.length > 1) {
+                    q = q + ' or '
+                } else if(index != querySearch.dates.length -1) {
+                    q = q + ' or '  
+                }
+                
+            }
+        });
+        q = q + ' )';
+        console.log(q);
+        query = query + q;
+    }
+    console.log(query);
     req.getConnection(function(err,connection){
         var query1 = connection.query(query, function(err,rows) {
             if(err)
@@ -86,10 +112,13 @@ exports.list = function(req, res){
 				}, function (err, result) {
 //                    console.log(dataBlock);
                     var response = [];
+                    var max = 0;
                     async.mapSeries(dataBlock, function(val, next) {
                         console.log(val);
                         var q = 'select * FROM sessionsCat.Speaker_To_Session sts left join sessionsCat.speaker s on s.speakerId = sts.speakerId where sts.sessionId = '+val.id;
-                        console.log(q);
+                        if(val.duration > max) {
+                            max = val.duration;
+                        }
                         connection.query(q, function(err,rows) {
                             if(err) {
                                 console.log(err);
@@ -101,7 +130,7 @@ exports.list = function(req, res){
                             next();
                         });
                     }, function (err, result) {
-					   res.send({data:response}); 
+					   res.send({data:response, maxDuration : max}); 
 				    });
 				})
             
@@ -165,6 +194,42 @@ exports.types = function(req, res) {
          });
     });
 };
+
+exports.speakerSesssion = function(req, res) {
+  req.getConnection(function(err,connection) {
+        var q = "select * from sessionsCat.session s inner join sessionsCat.Speaker_To_Session sts on (sts.sessionId = s.id) where sts.speakerId = "+req.query.speakerId;
+        var query = connection.query(q,function(err,rows) {
+            if(err)
+                console.log("Error Selecting : %s ",err );
+                res.send({data:rows});
+         });
+    });
+};
+exports.distinctDates = function(req, res) {
+  req.getConnection(function(err,connection) {
+        var q = "SELECT distinct from_unixtime(startTime/1000,'%Y-%m-%d') as distinctDate from sessionsCat.session;";
+        var query = connection.query(q,function(err,rows) {
+            if(err)
+                console.log("Error Selecting : %s ",err );
+                var data = [];
+                async.mapSeries(rows, function(val, next) {
+                    var d = {};
+                    console.log(val)
+                    d.id = val.distinctDate;
+                    d.name =val.distinctDate;
+                    data.push(d);
+                    next();
+                }, function (err, result) {
+				   res.send({data:data});
+				});
+                
+         });
+    });
+};
+
+
+
+
 
 
 
