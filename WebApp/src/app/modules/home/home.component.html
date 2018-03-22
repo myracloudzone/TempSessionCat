@@ -87,18 +87,55 @@
                                             <div class="col-sm-2">
                                                 <div class="device-margin">
                                                     <button class="btn btn-blue cursor-pointer" (click)="getSessionData()">Search</button> 
-                                                    <!-- <i class="fa fa-filter fa-2x"></i> -->
                                                 </div>
-                                            </div>    
-                                            <div class="col-sm-1" >
-                                                   
+                                                <div class="dropdown">
+                                                    <span class="sort" data-toggle="dropdown"><i class="fa fa-filter fa-2x"></i></span>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" (click)="setSortBy('s.duration')"><i [ngClass]="(sortField == 's.duration') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Duration</a>
+                                                        <a class="dropdown-item" (click)="setSortBy('s.startTime')"><i [ngClass]="(sortField == 's.startTime') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Start Time</a>
+                                                        <a class="dropdown-item" (click)="setSortBy('l.name')"><i [ngClass]="(sortField == 'l.name') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Level Name</a>
+                                                        <a class="dropdown-item" (click)="setSortBy('lc.name')"><i [ngClass]="(sortField == 'lc.name') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Location Name</a>
+                                                        <a class="dropdown-item" (click)="setSortBy('st.name')"><i [ngClass]="(sortField == 'st.name') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Status Name</a>
+                                                        <a class="dropdown-item" (click)="setSortBy('tg.name')"><i [ngClass]="(sortField == 'tg.name') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Tag Name</a>
+                                                        <a class="dropdown-item" (click)="setSortBy('tr.name')"><i [ngClass]="(sortField == 'tr.name') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Track Name</a>
+                                                        <a class="dropdown-item" (click)="setSortBy('type.name')"><i [ngClass]="(sortField == 'type.name') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Type Name</a>
+                                                    </div>
+                                                </div>
                                             </div>    
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- <div class="card mt10">
-                                <div class="card-block sessionDataBlock">
+                                <div class="card-block listCard">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                                <ul class="scheduleday_wrapper tab">
+                                                        <li data-tab="day-1" class="scheduleday_title">
+                                                            <div class="scheduleday_title_content">
+                                                                <h6 style="color:;">Day 1</h6>
+                                                                <div class="scheduleday_desc" style="color:;">Sunday, October 28th
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li data-tab="day-2" class="scheduleday_title">
+                                                            <div class="scheduleday_title_content">
+                                                                <h6 style="color:;">Day 2</h6>
+                                                                <div class="scheduleday_desc" style="color:;">Monday, October 29th
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li data-tab="day-3" class="scheduleday_title active">
+                                                            <div class="scheduleday_title_content">
+                                                                <h6 style="color:;">Day 3</h6>
+                                                                <div class="scheduleday_desc" style="color:;">Tuesday, October 30th
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                </ul>
+                                        </div>
+                                        
+                                    </div>
                                 </div>
                             </div>             -->
                             <div class="card mt10">

@@ -177,4 +177,67 @@ hr {
 .mb5 {
     margin-bottom: 5px;
 }
+.scheduleday_wrapper.tab {
+    background: #007bff;
+}
+.scheduleday_wrapper.tab {
+    background: #007bff;
+    margin-bottom: 0;
+}
+.scheduleday_wrapper {
+    list-style: none;
+    display: block;
+    -webkit-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+    /* margin: 20px 0 20px 0; */
+}
+.scheduleday_wrapper.tab li.scheduleday_title {
+    display: inline-block;
+    border: 0 !important;
+    cursor: pointer;
+    width: auto;
+    margin-right: 0;
+}
+.scheduleday_wrapper li.scheduleday_title, .scheduleday_wrapper.tab {
+    background: #007bff;
+}
+.scheduleday_wrapper li.scheduleday_title h4, .scheduleday_wrapper li.scheduleday_title {
+    color: #fff;
+    margin-right: 10px;
+    display: inline-block;
+}
+.scheduleday_wrapper li.scheduleday_title {
+    padding: 10px 10px 10px 10px;
+    background: #007bff;
+    width: 100%;
+    box-sizing: border-box;
+}
+.listCard {
+    padding-right: 0px;
+    padding-top: 0px;
+    padding-left: 0px;
+}
+.scheduleday_title:hover { 
+    background-color: yellow;
+}
+.scheduleday_wrapper.tab li.scheduleday_title.active {
+    background: #0d9cd8;
+}
+.sort {
+    position: relative;
+    float: right;
+    margin-top: -38px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+.dropdown-menu {
+    padding-left : 0px!important;
+}
+.dropdown-item {
+    padding-left: 10px;
+}
+.pl15 {
+    padding-left: 15px;
+}
 

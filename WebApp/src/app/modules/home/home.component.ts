@@ -22,9 +22,15 @@ export class HomeComponent implements OnInit {
   currentSpeakerSession = [];
   maxDuration = 0;
   listLoading = true;
+  sortField = 's.startTime';
 
   constructor(private dataService: DataService, private spinnerService: Ng4LoadingSpinnerService, private modalService: NgbModal) {
     //  private spinnerService: Ng4LoadingSpinnerService,
+  }
+
+  setSortBy(field) {
+    this.sortField = field;
+    this.getSessionData();
   }
 
   openSpeaker(content, speaker) {
@@ -126,11 +132,12 @@ export class HomeComponent implements OnInit {
     var start = new Date(startTime);
     var end = new Date(endTime);
     var datePipe = new DatePipe('en-US');
+    console.log('S.D = '+start.getDay()+ ' E.D = '+end.getDay()+' S.M = '+start.getMonth()+' E.M = '+end.getMonth()+' S.Y = '+start.getFullYear()+' E.Y ' + end.getFullYear());
     if(start.getDay() === end.getDay() && start.getMonth() === end.getMonth() && start.getFullYear() === end.getFullYear()) {
         return datePipe.transform(start, 'yyyy-MM-dd').toString() + '  ' +
                 datePipe.transform(start, 'HH:mm').toString() + ' - ' + datePipe.transform(end, 'HH:mm').toString();
     } else {
-      return datePipe.transform(start, 'yyyy-MM-dd HH:mm').toString() + ' - ' + datePipe.transform(end, 'yyyy-MM-dd HH:mm').toString();
+        return datePipe.transform(start, 'yyyy-MM-dd HH:mm').toString() + ' - ' + datePipe.transform(end, 'yyyy-MM-dd HH:mm').toString();
     }
 
   }
@@ -238,6 +245,7 @@ export class HomeComponent implements OnInit {
   getSessionData() {
     this.spinnerService.show();
     this.listLoading = true;
+    this.filterArrayObject['sortField'] = this.sortField;
     this.dataService.getData(this.filterArrayObject).subscribe(resp => {
       setTimeout(()=> {
         this.spinnerService.hide();
