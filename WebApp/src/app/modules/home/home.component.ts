@@ -30,6 +30,17 @@ export class HomeComponent implements OnInit {
   cartProgressClass = 'progress-bar bg-success';
   totalCartValue = 0;
 
+  setScrollBar() {
+    if(window.navigator.platform.toLowerCase().indexOf('mac') < 0) {
+      var link = document.createElement( 'link' );
+      link.href = location.protocol+'//'+location.host+'/assets/css/customScrollBar.css';
+      link.type = 'text/css';
+      link.rel = 'stylesheet';
+      link.media = 'screen,print';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+  }
+
   setBudgetLimit() {
     if(this.budgetLimit.value == null || this.budgetLimit.value == '') {
 
@@ -367,6 +378,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.setScrollBar();
     this.setDefaultFilterObject();
     $('#sidebar-btn').click();
     this.setFilters();
