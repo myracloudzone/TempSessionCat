@@ -31,7 +31,7 @@
                     <h6>Sessions:</h6>
                     <hr>
                     <div class="col-sm-12 pl0 pr0"> 
-                        <div class="col-sm-12 speakerSessionList" *ngFor="let session of currentSpeakerSession" ngbTooltip="{{session.name}}">
+                        <div class="col-sm-12 speakerSessionList" *ngFor="let session of currentSpeakerSession">
                             <div style="width:80%" class="ellipses" >
                                 {{session.name}} [{{session.code}}]
                                 
@@ -157,7 +157,7 @@
                                                 <div style="width : 80%" class="ellipses">
                                                     <a class="cursor-pointer regular-strong" style="width : 100%" ngbTooltip="{{data.name}}" placement="bottom" (click)="data.showDetails = !data.showDetails"><i [ngClass]="(data.showDetails == null || data.showDetails == false) ? 'fa fa-chevron-circle-right dropLink color-blue' : 'fa fa-chevron-circle-down dropLink color-blue'" ></i> {{data.name}} [{{data.code}}]</a>  
                                                 </div>
-                                                <div><i [ngClass]="(data.isFav == null || data.isFav == false) ? 'fa fa-star-o cursor-pointer pull-right fav' : 'fa fa-star   cursor-pointer  fav pull-right'" (click)="data.isFav = !data.isFav">
+                                                <div><i [ngClass]="(data.isFav == null || data.isFav == false) ? 'fa fa-star-o cursor-pointer pull-right fav' : 'fa fa-star   cursor-pointer  fav pull-right'" (click)="addToCart(data)">
                                                         <span class="duration">
                                                             <!-- {{data.duration}} Minutes -->
                                                         <div class="progress" style="width : 100px;">
@@ -194,11 +194,32 @@
     </div>
 
 
-    <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" (click)="hideCart()">&times;</a>
-            <div class="row">
-                <div class="col-sm-12">
-                    
-                </div>
+<div id="mySidenav" class="sidenav">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm-12" style="border-bottom: 2px solid #cdcdcd;">
+                <h5 class="color-white">Cart&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-usd"></i>{{totalCartValue}}</h5>
+                <span class="pull-right cartClose color-white" (click)="hideCart()">&times;</span>
             </div>
+            <div class="col-sm-12 mt10">
+                <!-- <form> -->
+                    <div class="form-group color-white">
+                        <label for="exampleInputEmail1">Budget</label>
+                        <input type="text" class="form-control form-control-sm" name="budget" aria-describedby="Budget" placeholder="Budget" [(ngModel)]="budgetLimit.value" (keyup)="setBudgetLimit()">
+                    </div>
+                    <div class="progress" style="margin-top: -10px; margin-bottom: 5px;" *ngIf="budgetLimit.value != null && budgetLimit.value != ''">
+                        <div class="{{cartProgressClass}}" role="progressbar" [ngStyle]="{'width': getCartProgressMaxValue()}" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                <!-- </form> -->
+                <div class="col-sm-12 pl0 pr0 feeListBox">
+                    <div class="col-sm-12 feeList" *ngFor="let session of cartItems">
+                        <div style="width:100%" class="ellipses" placement="bottom" ngbTooltip="{{session.name}}">
+                            <p class="mb0">[{{session.code}}] {{session.name}} <i class="fa fa-trash pull-right feeItemDelete" (click)="removeItemFee(session)"></i></p>
+                            <p class="mb0"><i class="fa fa-usd"> {{session.typeColor}}</i></p>
+                        </div>
+                    </div>
+                </div>        
+            </div>                                                
+        </div>
     </div>
+</div>

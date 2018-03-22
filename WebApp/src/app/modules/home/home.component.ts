@@ -24,16 +24,93 @@ export class HomeComponent implements OnInit {
   maxDuration = 0;
   listLoading = true;
   sortField = 'name';
+  cartItemsIds = [];
+  cartItems = [];
+  budgetLimit = {value : null};
+  cartProgressClass = 'progress-bar bg-success';
+  totalCartValue = 0;
+
+  setBudgetLimit() {
+    if(this.budgetLimit.value == null || this.budgetLimit.value == '') {
+
+    } else {
+      this.budgetLimit.value = parseInt(this.budgetLimit.value+'');
+      if(isNaN(this.budgetLimit.value)) {
+        this.budgetLimit.value = null;
+      }
+    }
+  }
+
+  getCartProgressMaxValue() {
+    var total = 0;
+    this.cartItems.forEach(function (v, k) {
+      if(v.typeColor != null && v.typeColor != '') { //refering fees temporary
+        total = total + parseInt(v.typeColor);
+      }
+    });
+    var limit = parseInt(this.budgetLimit.value);
+    var per = (total/limit)*100;
+    if(per > 100) {
+      this.cartProgressClass = 'progress-bar bg-danger';
+      return '100%';
+    } else {
+      if(per > 90) {
+        this.cartProgressClass = 'progress-bar bg-danger';
+      } else if(per > 60){
+        this.cartProgressClass = 'progress-bar bg-warning';
+      } else {
+        this.cartProgressClass = 'progress-bar bg-success';
+      }
+      return per+'%';
+    }
+  }
 
   constructor(private dataService: DataService, private spinnerService: Ng4LoadingSpinnerService, private modalService: NgbModal) {
     //  private spinnerService: Ng4LoadingSpinnerService,
   }
 
   showCart() {
-    document.getElementById('mySidenav').style.width = '250px';
+    document.getElementById('mySidenav').style.width = '350px';
   }
   hideCart() {
     document.getElementById('mySidenav').style.width = '0px';
+  }
+  removeItemFee(item) {
+    var index = this.cartItemsIds.indexOf(item.id);
+    var tempItems = [];
+    this.cartItemsIds.splice(index, 1);
+    this.sessionData.forEach(function (v, k) {
+      if(v.id == item.id) {
+        v.isFav = false;
+      }
+    });
+    this.cartItems.forEach(function (v, k) {
+        if(v.id != item.id) {
+          tempItems.push(v);
+        }
+    });
+    if(item.typeColor != null) {
+      var val = parseInt(item.typeColor);
+      if(!isNaN(val)) {
+        this.totalCartValue = this.totalCartValue - val;
+      }
+    }
+    this.cartItems = tempItems;
+  }
+  addToCart(data) {
+    if(data.isFav == null || data.isFav == false) {
+      data.isFav = true;
+      this.cartItemsIds.push(data.id);
+      this.cartItems.push(data);
+      if(data.typeColor != null) {
+        var val = parseInt(data.typeColor);
+        if(!isNaN(val)) {
+          this.totalCartValue = this.totalCartValue + val;
+        }
+      }
+    } else {
+      data.isFav = false;
+    }
   }
 
   setSortBy(field) {
@@ -260,7 +337,19 @@ export class HomeComponent implements OnInit {
         this.sessionData = resp.body['data'];
         this.maxDuration = resp.body['maxDuration'];
         this.listLoading = false;
-      },1000);
+        this.sessionData.forEach((v,k) => {
+          if(v.isFav == true) {
+            this.cartItems.push(v);
+            this.cartItemsIds.push(v.id);
+            if(v.typeColor != null) {
+              var val = parseInt(v.typeColor);
+              if(!isNaN(val)) {
+                this.totalCartValue = this.totalCartValue + val;
+              }
+            }
+          }
+        })
+      },500);
     });
   }
 

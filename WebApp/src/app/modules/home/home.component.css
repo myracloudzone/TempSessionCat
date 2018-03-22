@@ -57,6 +57,11 @@ body {
     padding-top: 5px !important;
     padding-bottom: 5px !important;
 }
+.feeListBox {
+    max-height: calc(100vh - 175px);
+    min-height: calc(100vh - 175px);
+    overflow-y: auto;
+}
 .filter-block {
     /* min-height : calc(100vh - 400px); */
     min-height: 400px;
@@ -263,11 +268,11 @@ hr {
     background-color: #111;
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 60px;
+    padding-top: 30px;
 }
 
 .sidenav a {
-    padding: 8px 8px 8px 32px;
+    padding: 4px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
     color: #818181;
@@ -285,6 +290,33 @@ hr {
     right: 25px;
     font-size: 36px;
     margin-left: 50px;
+}
+.cartClose {
+    position: relative;
+    margin-top: -40px;
+    font-size: x-large;
+    margin-right: 10px;
+}
+.color-white {
+    color: white;
+}
+
+.feeList {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border: 2px solid #cdcdcd;
+    background: #292b2c;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    font-size: 13px;
+    color: #fffbed;
+}
+.feeItemDelete {
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 3px;
+    margin-right: 0px !important;
+    position: relative;
 }
 
 @media screen and (max-height: 450px) {
