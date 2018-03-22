@@ -59,6 +59,10 @@ exports.list = function(req, res){
         console.log(q);
         query = query + q;
     }
+    
+    if(querySearch.sortField != null) {
+        query = query + ' order by ' + querySearch.sortField+' asc';
+    }
     console.log(query);
     req.getConnection(function(err,connection){
         var query1 = connection.query(query, function(err,rows) {
