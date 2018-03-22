@@ -15,7 +15,7 @@ exports.list = function(req, res){
     if(req.query.request != null) {
         querySearch = JSON.parse(req.query.request);
     }
-    var query = "select s.id, s.isFav, s.name, tg.id as tagId, tg.name as tagName, type.id as typeId, type.name as typeName, s.code, startTime, endTime, duration, description, l.id as levelId, l.name as levelName, l.color as levelColor, lc.id as locationId, lc.name as locationName, lc.color as locationColor, st.id as statusId, st.name as statusName, st.color as statusColor, tr.name as trackName, tr.id  as trackId, tr.color as trackColor from sessionsCat.session s left join sessionsCat.Level l on l.id = s.sessionLevel  left join sessionsCat.Location lc on lc.id = s.sessionLocation left join   sessionsCat.Status st on st.id = s.sessionStatus  left join sessionsCat.Track tr on tr.id = s.sessionTrack left join sessionsCat.tag_to_session tts on tts.sessionId = s.id left join sessionsCat.Tag tg on tts.tagId = tg.id left join Type type on type.id = s.sessionType where 1=1"
+    var query = "select s.id, s.isFav, s.name, tg.id as tagId, tg.name as tagName, type.id as typeId, type.name as typeName, type.color as typeColor, s.code, startTime, endTime, duration, description, l.id as levelId, l.name as levelName, l.color as levelColor, lc.id as locationId, lc.name as locationName, lc.color as locationColor, st.id as statusId, st.name as statusName, st.color as statusColor, tr.name as trackName, tr.id  as trackId, tr.color as trackColor from sessionsCat.session s left join sessionsCat.Level l on l.id = s.sessionLevel  left join sessionsCat.Location lc on lc.id = s.sessionLocation left join   sessionsCat.Status st on st.id = s.sessionStatus  left join sessionsCat.Track tr on tr.id = s.sessionTrack left join sessionsCat.tag_to_session tts on tts.sessionId = s.id left join sessionsCat.Tag tg on tts.tagId = tg.id left join Type type on type.id = s.sessionType where 1=1"
     if(querySearch.sessionLevel != null && querySearch.sessionLevel.length > 0) {
         query = query + " and s.sessionLevel in ("+querySearch.sessionLevel.toString()+")";
     }
@@ -94,6 +94,7 @@ exports.list = function(req, res){
                         data.typeId = row.typeId;
                         data.typeName = row.typeName;
                         data.trackColor = row.trackColor;
+                        data.typeColor = row.typeColor;
                         data.isFav = row.isFav;
                         if(row.tagId == null || row.tagId == '') {
                             data.tags = [];
