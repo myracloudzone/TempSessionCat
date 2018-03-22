@@ -247,7 +247,7 @@ exports.setDates = function(req, res) {
                 next();
             }, function (err, result) {
                 async.mapSeries(ids, function(vid, nextId) {
-                    var s = ldt + (60*60*1000);
+                    var s = ldt + (180*60*1000);
                     var e = s + (getMin()*60*1000);
                     var d = Math.floor(((e-s)/1000)/60);
                     ldt = e;
