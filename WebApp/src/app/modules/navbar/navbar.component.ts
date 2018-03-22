@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
     $('#side-panel').toggleClass('visible');
     console.log(this.isSideToggled)
     if (this.isSideToggled) {
-      $('#page-content-wrapper').css('padding-left', '80px');
+      $('#page-content-wrapper').css('padding-left', '0px');
     } else {
       $('#page-content-wrapper').css('padding-left', '200px');
     }

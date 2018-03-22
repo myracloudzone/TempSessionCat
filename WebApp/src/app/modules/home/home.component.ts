@@ -29,6 +29,13 @@ export class HomeComponent implements OnInit {
     //  private spinnerService: Ng4LoadingSpinnerService,
   }
 
+  showCart() {
+    document.getElementById('mySidenav').style.width = '250px';
+  }
+  hideCart() {
+    document.getElementById('mySidenav').style.width = '0px';
+  }
+
   setSortBy(field) {
     this.sortField = field;
     this.getSessionData();

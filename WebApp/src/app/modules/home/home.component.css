@@ -60,13 +60,13 @@ body {
 .filter-block {
     /* min-height : calc(100vh - 400px); */
     min-height: 400px;
-    max-height: calc(100vh - 125px);
+    max-height: calc(100vh - 162px);
     overflow: auto;
     padding-right: 10px;
     padding-left: 15px;
 }
 .sessionDataBlock {
-    max-height: calc(100vh - 215px);
+    max-height: calc(100vh - 252px);
     overflow: auto;
 }
 .fs13 {
@@ -80,7 +80,7 @@ body {
     color: #01748e;
 }
 #page-content-wrapper {
-    padding-top: 0px !important;
+    padding-top: 10px !important;
 }
 .custom-control-indicator{
     width: 15px !important;
@@ -239,5 +239,56 @@ hr {
 }
 .pl15 {
     padding-left: 15px;
+}
+#sidebar-wrapper {
+    display: none !important;
+}
+
+
+.cartBox {
+    left: 99%;
+    font-size: 50px;
+    position: absolute;
+    cursor: pointer;
+    margin-left: -3px;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
 }
 

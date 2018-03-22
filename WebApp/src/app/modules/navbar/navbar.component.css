@@ -1,6 +1,44 @@
 #page-content-wrapper {
     padding-left: 200px;
 }
+.flex-list {
+    position: relative;
+    margin: -5px;
+    overflow: hidden;
+}
+.flex-list ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+	margin-left: -1px;
+	cursor: pointer;
+}
+.flex-list li:hover {
+	color: rgb(77, 112, 226) !important;
+}
+.flex-list li {
+	flex-grow: 1;
+	font-family: ProximaNova-Light;
+	flex-basis: auto;
+	list-style-type: none;
+	margin: .25em 0;
+	font-size: 20px;
+	color: #CCCCCC;
+	text-align: left;
+    padding: 0 1em;
+    text-align: center;
+}
+.tabActive {
+	color: #FFFFFF !important;
+}
+.pipe {
+	border-right: 1px solid #2CD1CC;
+}
+#page-content-wrapper {
+	padding-left: 80px !important;
+    /* padding-right: 80px !important; */
+}
 .navbar {
     min-height: 55px;
     background-color: #061733;

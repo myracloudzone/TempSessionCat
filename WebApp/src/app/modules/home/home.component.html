@@ -1,4 +1,6 @@
 <app-navbar></app-navbar>
+<span class="cartBox" (click)="showCart()" ><i class="fa fa-caret-left"></i></span>
+
 <ng-template #headerPicker let-c="close" let-d="dismiss">
     <div class="modal-header">
         <h6 class="modal-title">Speaker Detail</h6>
@@ -45,10 +47,11 @@
         <button type="button" class="btn btn btn-blue btn-outline-dark" (click)="c('Close click')">Close</button>
     </div>
 </ng-template>
-<button (click)="toggleSpinner()">Toggle</button>  
+<!-- <button (click)="toggleSpinner()">Toggle</button>   -->
 <!-- <div class="col-sm-12" *ngIf="obj.loading">
     <sk-wandering-cubes></sk-wandering-cubes>       
 </div>     -->
+
 <div id="side-panel" class="visible">
     <div id="page-content-wrapper">
         <div class="container-fluid">
@@ -102,7 +105,9 @@
                                                         <a class="dropdown-item" (click)="setSortBy('typeName')"><i [ngClass]="(sortField == 'typeName') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Type Name</a>
                                                     </div>
                                                 </div>
-                                            </div>    
+                                            </div>  
+                                            
+                                              
                                         </div>
                                     </div>
                                 </div>
@@ -158,7 +163,7 @@
                                                         <div class="progress" style="width : 100px;">
                                                                 <div class="progress-bar progress-bar-success" ngbTooltip="{{getHours(data.duration)}}" role="progressbar"
                                                                 aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width': getProgressmaxValue(data.duration)}">
-                                                                    {{getProgressmaxValue(data.duration)}}
+                                                                    <!-- {{getProgressmaxValue(data.duration)}} -->
                                                                 </div>
                                                               </div>    
                                                 </span></i> </div>
@@ -173,7 +178,7 @@
                                                     <p class="mb0 mt10 subHeading"><b>Type:</b> {{data.typeName}}</p>
                                                     <!-- <p class="mb0 mt10 subHeading"><b>Location:</b> {{data.locationName}}</p> -->
                                                     <p class="mb0 mt10 subHeading"><b>Track:</b> {{data.trackName}}</p>
-                                                    <p class=" mt10 subHeading"><b>Status:</b> {{data.statusName}}</p>
+                                                    <p class="mt10 subHeading" *ngIf="data.trackname == 'Hands on Lab' || data.trackname == 'Activity' || data.trackname == 'Workshop'"><b>Fee:</b>${{data.trackColor}}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -186,4 +191,14 @@
                 </div>
             </div>
         </div>
+    </div>
+
+
+    <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" (click)="hideCart()">&times;</a>
+            <div class="row">
+                <div class="col-sm-12">
+                    
+                </div>
+            </div>
     </div>

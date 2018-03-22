@@ -10,7 +10,7 @@
        <form class="form-inline my-2 my-lg-0">
           <ul class="nav navbar-nav navbar-right">
              <!-- <li class="nav-item"><a href="#" class="color-white">My Template</a></li>-->
-             <li class="nav-item"><a href="#" class="color-white">Session Sections</a></li> 
+             <li class="nav-item"><a href="" class="color-white">Tableau Conference</a></li> 
              <!-- <li class="nav-item"><a href="#" class="color-white">Session Sections<span class="fa fa-plus-circle"></span></a></li> -->
              <li class="dropdown">
                 <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#"><img alt=" " [src]="userPath" class="user"></a>
@@ -24,6 +24,23 @@
        </form>
     </div>
  </nav>
+ <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="flex-list">
+                        <ul>
+                            <li class="siteLink pipe">Attend</li>
+                            <li class="siteLink pipe">Exhibitors</li>
+                            <li class="siteLink pipe tabActive">Sessions</li>
+                            <li class="siteLink pipe">Speakers</li>
+                            <li class="siteLink">Tracks</li>
+                        </ul>
+                    </div>
+        </div>
+     </nav>
  <!-- <div class="filters">
     <div class="container-fluid">
        <div class="row">
@@ -51,7 +68,7 @@
  <div>
     <div id="side-panel" class="visible">
        <div id="sidebar-wrapper" class="visible">
-          <div class="nav-item" id="sidebar-btn" (click)="toggleSideBar()"> <i class="fa fa-bars" aria-hidden="true"></i> </div>
+          <div class="nav-item" id="sidebar-btn" style="display:none" (click)="toggleSideBar()"> <i class="fa fa-bars" aria-hidden="true"></i> </div>
           <ul class="sidebar-nav">
              <!-- <li class="nav-item"><a class="nav-link"><span><i class="fa fa-calendar-minus-o"></i></span><span>Metrics</span></a></li>
              <li class="nav-item"><a href="/registration" class="nav-link bottomLine"><span><i class="fa fa-vcard"></i></span><span>Registrations</span></a></li>
