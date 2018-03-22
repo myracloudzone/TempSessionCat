@@ -35,7 +35,7 @@ exports.list = function(req, res){
         query = query + " and s.sessionType in ("+querySearch.sessionType.toString()+")"; 
     }
     if(querySearch.term != null && querySearch.term != '') {
-        query = query + " and (s.name like '%"+querySearch.term+"%' or s.code like '%"+querySearch.term+"%'"
+        query = query + " and (s.name like '%"+querySearch.term+"%' or s.code like '%"+querySearch.term+"%')"
     }
     if(querySearch.dates != null && querySearch.dates.length > 0) {
         var q = " and ("
@@ -263,6 +263,7 @@ exports.setDates = function(req, res) {
       });
   });
 };
+
 
 function getMin() {
     var values = [30, 60, 150];
