@@ -6,6 +6,7 @@
 var async = require('async');
 var moment = require('moment');
 var forEach = require('async-foreach').forEach;
+var rn = require('random-number');
 
 exports.list = function(req, res){
   console.log(req.query)
@@ -226,6 +227,46 @@ exports.distinctDates = function(req, res) {
          });
     });
 };
+
+exports.setDates = function(req, res) {
+  req.getConnection(function(err,connection) {
+      var ids = [];
+      var ldt = 1520823444000;
+      
+      var query = connection.query('select id from sessionsCat.session',function(err,rows) {
+            if(err)
+                console.log("Error Selecting : %s ",err );
+            async.mapSeries(rows, function(val, next) {
+                ids.push(val.id);
+                next();
+            }, function (err, result) {
+                async.mapSeries(ids, function(vid, nextId) {
+                    var s = ldt + (180*60*1000);
+                    var e = s + (getMin()*60*1000);
+                    ldt = e;
+                    connection.query("update sessionsCat.session set startTime ="+s+", endTime="+e+" where id = "+vid ,function(err,rows) {
+                        if(err)
+                            console.log("Error Selecting : %s ",err );
+                        nextId();
+                    });
+                }, function (err, result) {
+                    res.send("Saved");
+                });
+            });        
+      });
+  });
+};
+
+function getMin() {
+    var values = [0,15,30,45,60];
+    var options = {
+        min:  0, max:  4, integer: true
+    }
+    var index = rn(options);
+    return values[index];
+}
+
+
 
 
 

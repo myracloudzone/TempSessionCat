@@ -69,6 +69,9 @@ app.get('/tracks', customers.tracks);
 app.get('/types', customers.types);
 app.get('/speakerSesssion', customers.speakerSesssion);
 app.get('/distinctDates', customers.distinctDates);
+app.get('/setDates', customers.setDates);
+
+
 
 
 

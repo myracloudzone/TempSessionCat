@@ -13,6 +13,7 @@
     "express-myconnection": "1.0.4",
     "jade": "*",
     "moment": "^2.21.0",
-    "mysql": "2.2.0"
+    "mysql": "2.2.0",
+    "random-number": "0.0.9"
   }
 }
