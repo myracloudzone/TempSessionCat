@@ -7,6 +7,7 @@ var async = require('async');
 var moment = require('moment');
 var forEach = require('async-foreach').forEach;
 var rn = require('random-number');
+var arraySort = require('array-sort');
 
 exports.list = function(req, res){
   console.log(req.query)
@@ -61,7 +62,7 @@ exports.list = function(req, res){
     }
     
     if(querySearch.sortField != null) {
-        query = query + ' order by ' + querySearch.sortField+' asc';
+        query = query + ' ORDER BY ' + querySearch.sortField+' ASC';
     } 
     console.log(query);
     req.getConnection(function(err,connection){
@@ -134,6 +135,7 @@ exports.list = function(req, res){
                             next();
                         });
                     }, function (err, result) {
+                        response = arraySort(response, querySearch.sortField);
 					   res.send({data:response, maxDuration : max}); 
 				    });
 				})
@@ -234,7 +236,7 @@ exports.distinctDates = function(req, res) {
 exports.setDates = function(req, res) {
   req.getConnection(function(err,connection) {
       var ids = [];
-      var ldt = 1520823444000;
+      var ldt = 1520902800000;
       
       var query = connection.query('select id from sessionsCat.session',function(err,rows) {
             if(err)
@@ -262,9 +264,9 @@ exports.setDates = function(req, res) {
 };
 
 function getMin() {
-    var values = [15,30,45,60];
+    var values = [30, 60, 150];
     var options = {
-        min:  0, max:  4, integer: true
+        min:  0, max:  2, integer: true
     }
     var index = rn(options);
     return values[index];
