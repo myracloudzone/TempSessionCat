@@ -349,6 +349,8 @@ export class HomeComponent implements OnInit {
         this.sessionData = resp.body['data'];
         this.maxDuration = resp.body['maxDuration'];
         this.listLoading = false;
+        this.cartItems = [];
+        this.cartItemsIds = [];
         this.sessionData.forEach((v,k) => {
           if(v.isFav == true) {
             this.cartItems.push(v);
