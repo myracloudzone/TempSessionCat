@@ -91,14 +91,15 @@
                                                 <div class="dropdown">
                                                     <span class="sort" data-toggle="dropdown"><i class="fa fa-filter fa-2x"></i></span>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" (click)="setSortBy('s.duration')"><i [ngClass]="(sortField == 's.duration') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Duration</a>
-                                                        <a class="dropdown-item" (click)="setSortBy('s.startTime')"><i [ngClass]="(sortField == 's.startTime') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Start Time</a>
-                                                        <a class="dropdown-item" (click)="setSortBy('l.name')"><i [ngClass]="(sortField == 'l.name') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Level Name</a>
-                                                        <a class="dropdown-item" (click)="setSortBy('lc.name')"><i [ngClass]="(sortField == 'lc.name') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Location Name</a>
-                                                        <a class="dropdown-item" (click)="setSortBy('st.name')"><i [ngClass]="(sortField == 'st.name') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Status Name</a>
-                                                        <a class="dropdown-item" (click)="setSortBy('tg.name')"><i [ngClass]="(sortField == 'tg.name') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Tag Name</a>
-                                                        <a class="dropdown-item" (click)="setSortBy('tr.name')"><i [ngClass]="(sortField == 'tr.name') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Track Name</a>
-                                                        <a class="dropdown-item" (click)="setSortBy('type.name')"><i [ngClass]="(sortField == 'type.name') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Type Name</a>
+                                                        <a class="dropdown-item" (click)="setSortBy('duration')"><i [ngClass]="(sortField == 'duration') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Duration</a>
+                                                        <a class="dropdown-item" (click)="setSortBy('levelName')"><i [ngClass]="(sortField == 'levelName') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Level Name</a>
+                                                        <a class="dropdown-item" (click)="setSortBy('locationName')"><i [ngClass]="(sortField == 'locationName') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Location Name</a>
+                                                        <a class="dropdown-item" (click)="setSortBy('name')"><i [ngClass]="(sortField == 'name') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Name</a>
+                                                        <a class="dropdown-item" (click)="setSortBy('startTime')"><i [ngClass]="(sortField == 'startTime') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Start Time</a>
+                                                        <a class="dropdown-item" (click)="setSortBy('statusName')"><i [ngClass]="(sortField == 'statusName') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Status Name</a>
+                                                        <a class="dropdown-item" (click)="setSortBy('tagName')"><i [ngClass]="(sortField == 'tagName') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Tag Name</a>
+                                                        <a class="dropdown-item" (click)="setSortBy('trackName')"><i [ngClass]="(sortField == 'trackName') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Track Name</a>
+                                                        <a class="dropdown-item" (click)="setSortBy('typeName')"><i [ngClass]="(sortField == 'typeName') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Type Name</a>
                                                     </div>
                                                 </div>
                                             </div>    

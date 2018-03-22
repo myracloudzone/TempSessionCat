@@ -5,6 +5,7 @@ import { DataService } from './home-service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { DatePipe } from '@angular/common';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -22,7 +23,7 @@ export class HomeComponent implements OnInit {
   currentSpeakerSession = [];
   maxDuration = 0;
   listLoading = true;
-  sortField = 's.startTime';
+  sortField = 'name';
 
   constructor(private dataService: DataService, private spinnerService: Ng4LoadingSpinnerService, private modalService: NgbModal) {
     //  private spinnerService: Ng4LoadingSpinnerService,
