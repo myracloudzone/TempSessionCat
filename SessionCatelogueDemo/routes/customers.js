@@ -62,7 +62,7 @@ exports.list = function(req, res){
     
     if(querySearch.sortField != null) {
         query = query + ' order by ' + querySearch.sortField+' asc';
-    }
+    } 
     console.log(query);
     req.getConnection(function(err,connection){
         var query1 = connection.query(query, function(err,rows) {
@@ -119,7 +119,6 @@ exports.list = function(req, res){
                     var response = [];
                     var max = 0;
                     async.mapSeries(dataBlock, function(val, next) {
-                        console.log(val);
                         var q = 'select * FROM sessionsCat.Speaker_To_Session sts left join sessionsCat.speaker s on s.speakerId = sts.speakerId where sts.sessionId = '+val.id;
                         if(val.duration > max) {
                             max = val.duration;
