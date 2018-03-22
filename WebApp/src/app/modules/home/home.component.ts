@@ -341,6 +341,7 @@ export class HomeComponent implements OnInit {
   getSessionData() {
     this.spinnerService.show();
     this.listLoading = true;
+    this.totalCartValue = 0;
     this.filterArrayObject['sortField'] = this.sortField;
     this.dataService.getData(this.filterArrayObject).subscribe(resp => {
       setTimeout(()=> {
