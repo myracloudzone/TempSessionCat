@@ -178,7 +178,7 @@
                                                     <p class="mb0 mt10 subHeading"><b>Type:</b> {{data.typeName}}</p>
                                                     <!-- <p class="mb0 mt10 subHeading"><b>Location:</b> {{data.locationName}}</p> -->
                                                     <p class="mb0 mt10 subHeading"><b>Track:</b> {{data.trackName}}</p>
-                                                    <p class="mt10 subHeading" *ngIf="data.trackname == 'Hands on Lab' || data.trackname == 'Activity' || data.trackname == 'Workshop'"><b>Fee:</b>${{data.trackColor}}</p>
+                                                    <p class="mt10 subHeading" *ngIf="data.typeName == 'Hands on Lab' || data.typeName == 'Activity' || data.typeName == 'Workshop'"><b>Fee: </b>${{data.typeColor}}</p>
                                                 </div>
                                             </div>
                                         </div>
