@@ -241,10 +241,11 @@ exports.setDates = function(req, res) {
                 next();
             }, function (err, result) {
                 async.mapSeries(ids, function(vid, nextId) {
-                    var s = ldt + (180*60*1000);
+                    var s = ldt + (60*60*1000);
                     var e = s + (getMin()*60*1000);
+                    var d = Math.floor(((e-s)/1000)/60);
                     ldt = e;
-                    connection.query("update sessionsCat.session set startTime ="+s+", endTime="+e+" where id = "+vid ,function(err,rows) {
+                    connection.query("update sessionsCat.session set startTime ="+s+", endTime="+e+", duration = "+d+ " where id = "+vid ,function(err,rows) {
                         if(err)
                             console.log("Error Selecting : %s ",err );
                         nextId();
@@ -258,7 +259,7 @@ exports.setDates = function(req, res) {
 };
 
 function getMin() {
-    var values = [0,15,30,45,60];
+    var values = [15,30,45,60];
     var options = {
         min:  0, max:  4, integer: true
     }
