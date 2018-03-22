@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
-<span class="cartBox" (click)="showCart()" ><i class="fa fa-caret-left"></i></span>
-
+<span class="cartBox" placement="left" ngbTooltip="Show Cart" (click)="showCart()" ><i class="fa fa-caret-left"></i></span>
+<!-- <span class="cartBox" placement="left" ngbTooltip="Show Cart" (click)="showCart()" ><i class="fa fa-shopping-cart"></i></span> -->
 <ng-template #headerPicker let-c="close" let-d="dismiss">
     <div class="modal-header">
         <h6 class="modal-title">Speaker Detail</h6>
