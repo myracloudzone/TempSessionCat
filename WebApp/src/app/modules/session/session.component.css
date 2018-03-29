@@ -1,0 +1,400 @@
+body {
+    font-weight: 300 !important;   
+}
+.tCenter {
+    text-align: center;
+}
+.bg-color-blue {
+    background-color: #061733;
+}
+.color-white {
+    color: #fff;
+}
+.pl0 {
+    padding-left: 0px;
+}
+.pr0 {
+    padding-right: 0px;
+}
+.plr0 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.plr10 {
+    padding-left: 10px !important;
+    padding-right: 10px  !important;
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+.fw300 {
+    font-weight: 300;
+}
+.fw400 {
+    font-weight: 400;
+}
+.regular {
+    font-weight: 500;
+}
+.regular-strong {
+    font-weight: 600;
+}
+.progress {
+    background: #ddd !important;
+}
+.sessionBox {
+    /* border-left: 5px solid red; */
+    background: #f2f2f2;
+    margin-bottom: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}  
+.modal-header   {
+    padding-top: 11px !important;
+    padding-bottom:11px !important;
+}
+.modal-footer   {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+.feeListBox {
+    max-height: calc(100vh - 175px);
+    min-height: calc(100vh - 175px);
+    overflow-y: auto;
+}
+.filter-block {
+    /* min-height : calc(100vh - 400px); */
+    min-height: 400px;
+    max-height: calc(100vh - 162px);
+    overflow: auto;
+    padding-right: 10px;
+    padding-left: 15px;
+}
+.sessionDataBlock {
+    max-height: calc(100vh - 252px);
+    overflow: auto;
+}
+.fs13 {
+    font-size: 13px;
+}
+.mb0 {
+    margin-bottom: 0px !important;
+}
+.speakerName {
+    font-weight: 700;
+    color: #01748e;
+}
+#page-content-wrapper {
+    padding-top: 10px !important;
+}
+.custom-control-indicator{
+    width: 15px !important;
+    height: 15px !important;
+}
+.custom-control {
+    min-height: 0.5rem !important;
+}
+.color-blue {
+    color : #0b2a57;
+}
+.fav {
+    font-size: 18px;
+    margin-top: -10px;
+}
+.txt:hover {
+    text-decoration: underline;
+    /* color: red; */
+}
+.clearAll {
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+.idcard {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 100%;
+}
+
+.idcard:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.idcontainer {
+    padding: 2px 16px;
+}
+.speakerSessionList {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border: 2px solid #cdcdcd;
+    background: #ddd;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+.duration {
+    float: left;
+    margin-right: 10px;
+}
+.separator {
+    border-bottom: 3px solid #DDD;
+}
+.mt5 {
+    margin-top: 5px;
+}
+.subHeading {
+    font-weight: 500 !important;
+    font-size:  15px !important;
+}
+.pb3 {
+    padding-bottom: 3px;
+}
+.mt10 {
+    margin-top: 10px;
+}
+.track-clr-bx {
+    width: 10px;
+    border-left: 5px solid #000;
+    height: 15px;
+    margin-top: 3px;
+}
+hr {
+    margin-top: 0px !important;
+    margin-bottom: 2px !important;
+}
+.ellipses {
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.pipe {
+    color: #0b2a57;
+    font-weight: 500;
+    font-size: 18px;
+}
+.dropLink {
+    font-size: 20px;
+    position: relative;
+}
+.pl20{
+    padding-left: 20px;
+}
+.mb5 {
+    margin-bottom: 5px;
+}
+.scheduleday_wrapper.tab {
+    background: #007bff;
+}
+.scheduleday_wrapper.tab {
+    background: #007bff;
+    margin-bottom: 0;
+}
+.scheduleday_wrapper {
+    list-style: none;
+    display: block;
+    -webkit-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
+    /* margin: 20px 0 20px 0; */
+}
+.scheduleday_wrapper.tab li.scheduleday_title {
+    display: inline-block;
+    border: 0 !important;
+    cursor: pointer;
+    width: auto;
+    margin-right: 0;
+}
+.scheduleday_wrapper li.scheduleday_title, .scheduleday_wrapper.tab {
+    background: #007bff;
+}
+.scheduleday_wrapper li.scheduleday_title h4, .scheduleday_wrapper li.scheduleday_title {
+    color: #fff;
+    margin-right: 10px;
+    display: inline-block;
+}
+.scheduleday_wrapper li.scheduleday_title {
+    padding: 10px 10px 10px 10px;
+    background: #007bff;
+    width: 100%;
+    box-sizing: border-box;
+}
+.listCard {
+    padding-right: 0px;
+    padding-top: 0px;
+    padding-left: 0px;
+}
+.scheduleday_title:hover { 
+    background-color: yellow;
+}
+.scheduleday_wrapper.tab li.scheduleday_title.active {
+    background: #0d9cd8;
+}
+.sort {
+    position: relative;
+    float: right;
+    margin-top: -38px;
+    margin-right: 30px;
+    cursor: pointer;
+}
+.dropdown-menu {
+    padding-left : 0px!important;
+}
+.dropdown-item {
+    padding-left: 10px;
+}
+.pl15 {
+    padding-left: 15px;
+}
+#sidebar-wrapper {
+    display: none !important;
+}
+
+
+.cartBox {
+    left: 99%;
+    font-size: 50px;
+    position: absolute;
+    cursor: pointer;
+    margin-left: -4px;
+    color: #777373;
+}
+
+.cartBox2 {
+    left: 100%;
+    font-size: 32px;
+    position: absolute;
+    cursor: pointer;
+    margin-left: -80px;
+    margin-top: 21px;
+    color: #07244e;
+    z-index: 40;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 30px;
+}
+
+.sidenav a {
+    padding: 4px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+.cartClose {
+    position: relative;
+    margin-top: -40px;
+    font-size: x-large;
+    margin-right: 10px;
+}
+.color-white {
+    color: white;
+}
+
+.feeList {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border: 2px solid #cdcdcd;
+    background: #292b2c;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    font-size: 13px;
+    color: #fffbed;
+}
+.feeItemDelete {
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 3px;
+    margin-right: 0px !important;
+    position: relative;
+}
+.dateBox{
+    min-height: 45px;
+    display: webkit-box  !important;
+    height: auto;
+    border: 1px solid #eee;
+    /* width: 100%; */
+    /* overflow-x: scroll; */
+}
+.timeBox2 {
+    min-height: 70px;
+    border-bottom: 1px solid #ddd;
+    height: auto;
+}
+.ml105 {
+    margin-left: 105px;
+}
+.w105 {
+    max-width: 105px !important;
+    min-width: 105px !important;
+    /* position: absolute; */
+}
+
+.mb5 {
+    margin-bottom: 5px;
+}
+
+.dateBoxHeader {
+    min-height: 45px;
+    height: auto;
+    border: 1px solid #eee;
+    background: #eee;
+    display: inline-flex;
+    border-bottom: 1px solid #000;
+}
+
+.dateField {
+    padding: 15px;
+    background: #eee;
+    /* position: absolute; */
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+    height: auto;
+    width: 105px;
+}
+.customContainer {
+    width: 100%;
+    overflow-x: auto;
+}
+.p-abs {
+    position: absolute;
+}
+
+.sTitle {
+    background: #f2f2f2;
+    border-left: 5px solid rgb(81, 65, 221);
+    padding-left: 10px;
+}
+.vl {
+    border-left: 1px solid #ddd;
+    height: auto;
+    position: relative;
+    margin-top: -47px;
+}
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+

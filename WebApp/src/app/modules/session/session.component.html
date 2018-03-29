@@ -1,0 +1,249 @@
+<app-navbar></app-navbar>
+<span class="cartBox" placement="left" ngbTooltip="Show Cart" (click)="showCart()" ><i class="fa fa-caret-left"></i></span>
+<span class="cartBox2" placement="left" ngbTooltip="Show Cart" (click)="showCart()" ><i class="fa fa-opencart"></i></span>
+
+<!-- <span class="cartBox" placement="left" ngbTooltip="Show Cart" (click)="showCart()" ><i class="fa fa-shopping-cart"></i></span> -->
+<ng-template #headerPickerSession let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h6 class="modal-title">Sessions</h6>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+       <div class="row">
+            <div class="col-sm-12" style="max-height: 370px; overflow: auto;">
+                <div class="col-sm-12 pl0 pr0">
+                    <div class="col-sm-12 pl0 pr0"> 
+                        <div class="col-sm-12 plr0 cursor-pointer" *ngFor="let data of currentTrackSession">
+                            <!-- <div style="width:80%" class="ellipses" >
+                                {{session.name}} [{{session.code}}]
+                            </div>
+                            <span class="pull-right" style="position: relative; margin-top: -19px;"> {{session.startTime | date : 'dd/MM/yyyy HH:mm:ss a'}}</span> -->
+                            <div class="col-sm-12 pl0 pr0 plr10 sessionBox fw300" [ngStyle]="{'border-left': ('7px solid '+ data.trackColor)}">
+                                    <div style="width : 80%" class="ellipses">
+                                        <a class="cursor-pointer regular-strong" style="width : 100%" ngbTooltip="{{data.name}}" placement="bottom" (click)="data.showDetails = !data.showDetails"><i [ngClass]="(data.showDetails == null || data.showDetails == false) ? 'fa fa-chevron-circle-right dropLink color-blue' : 'fa fa-chevron-circle-down dropLink color-blue'" ></i> {{data.name}} [{{data.code}}]</a>  
+                                    </div>
+                                    <div><i [ngClass]="(data.isFav == null || data.isFav == false) ? 'fa fa-star-o cursor-pointer pull-right fav' : 'fa fa-star   cursor-pointer  fav pull-right'" (click)="addToCart(data)">
+                                            <span class="duration">
+                                            <div class="progress" style="width : 100px;">
+                                                    <div class="progress-bar progress-bar-success" ngbTooltip="{{getHours(data.duration)}}" role="progressbar"
+                                                    aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width': getProgressmaxValue(data.duration)}">
+                                                    </div>
+                                                  </div>    
+                                    </span></i> </div>
+                                    <p class="mb0 text-muted pl20"><i class="fa fa-clock-o">&nbsp;</i>{{getStartEndDate(data.startTime, data.endTime)}} <span class="pipe">|</span><span>&nbsp;<i class="fa fa-map-marker">&nbsp;</i>{{data.locationName}}</span></p>
+                                    <p class="mb0 subHeading pl20" style="margin-bottom: 5px !important; margin-top: 5px !important;" *ngIf="data.showDetails">{{data.description}}</p>
+                                    <div *ngIf="data.showDetails" class="pl20">
+                                        <div class="col-sm-12 pl0 pr0">
+                                            <p class="mb5 separator pb3 subHeading" *ngIf="data.showDetails"><i class="fa fa-users">&nbsp;</i><b>SPEAKERS</b></p>
+                                            <span class="mb0" *ngFor="let speaker of data.speakers"><span class="speakerName" >{{speaker.speakerFName}} {{speaker.speakerLName}}</span> |</span>
+                                        </div>
+                                        <p class="mb0 mt10 subHeading"><b>Type:</b> {{data.typeName}}</p>
+                                        <p class="mb0 mt10 subHeading"><b>Track:</b> {{data.trackName}}</p>
+                                        <p class="mt10 subHeading" *ngIf="data.typeName == 'Hands on Lab' || data.typeName == 'Activity' || data.typeName == 'Workshop'"><b>Fee: </b>${{data.typeColor}}</p>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+       </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn btn-blue btn-outline-dark" (click)="c('Close click')">Close</button>
+    </div>
+</ng-template>
+<!-- <button (click)="toggleSpinner()">Toggle</button>   -->
+<!-- <div class="col-sm-12" *ngIf="obj.loading">
+    <sk-wandering-cubes></sk-wandering-cubes>       
+</div>     -->
+
+<div id="side-panel" class="visible">
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="card">
+                        <div class="card-block filter-block">
+                            <b>Filters</b> <span class="pull-right color-blue txt cursor-pointer clearAll" (click)="clearAllFilter()">Clear All</span>
+                            <hr size="30">
+                            <div *ngFor="let filter of filters">
+                                <span class="cursor-pointer fw400" (click)="filter.showOptions = !filter.showOptions"><i [ngClass]="filter.showOptions == false ? 'fa fa-chevron-circle-right color-blue' : 'fa fa-chevron-circle-down color-blue'"></i> {{filter.name}}</span>
+                                <div class="col-sm-12 pr0" *ngIf="filter.showOptions">
+                                    <!-- <input type="checkbox"></input> -->
+                                    <label class="custom-control custom-checkbox fs13 col-sm-12 fw300" *ngFor="let option of filter.options">
+                                            <input type="checkbox" class="custom-control-input" value="option.id" [(ngModel)]="filterObject[filter.type][option.id]" (change)="applyFilter(filter.type, option.id)"> <span class="track-clr-bx" *ngIf="filter.type == 'sessionTrack'" [ngStyle]="{'border-left': ('7px solid '+ option.color)}"></span>{{option.name}} 
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description"></span>
+                                    </label>
+                                    <!-- <label *ngFor="let option of filter.options" class="fs13"><input type="checkbox" value="option.id" (change)="applyFilter(filter.type, option.id)"/> {{option.name}}</label> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>        
+                </div>
+                <div class="col-sm-10 pl0">
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-panel active" id="reg">
+                            <div class="card">
+                                <div class="card-block">
+                                    <div class="row">
+                                            <div class="col-sm-10">
+                                                <div class="device-margin">
+                                                    <input type="text" class="form-control search-input"  [(ngModel)]="filterArrayObject['term']" placeholder="Search" (keyup.enter)="getSessionData()">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <div class="device-margin">
+                                                    <button class="btn btn-blue cursor-pointer" (click)="getSessionData()">Search</button> 
+                                                </div>
+                                                <div class="dropdown">
+                                                    <span class="sort" data-toggle="dropdown"><i class="fa fa-filter fa-2x"></i></span>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" (click)="setSortBy('duration')"><i [ngClass]="(sortField == 'duration') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Duration</a>
+                                                        <a class="dropdown-item" (click)="setSortBy('levelName')"><i [ngClass]="(sortField == 'levelName') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Level Name</a>
+                                                        <a class="dropdown-item" (click)="setSortBy('locationName')"><i [ngClass]="(sortField == 'locationName') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Location Name</a>
+                                                        <a class="dropdown-item" (click)="setSortBy('name')"><i [ngClass]="(sortField == 'name') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Name</a>
+                                                        <a class="dropdown-item" (click)="setSortBy('startTime')"><i [ngClass]="(sortField == 'startTime') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Start Time</a>
+                                                        <a class="dropdown-item" (click)="setSortBy('statusName')"><i [ngClass]="(sortField == 'statusName') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Status Name</a>
+                                                        <a class="dropdown-item" (click)="setSortBy('tagName')"><i [ngClass]="(sortField == 'tagName') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Tag Name</a>
+                                                        <a class="dropdown-item" (click)="setSortBy('trackName')"><i [ngClass]="(sortField == 'trackName') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Track Name</a>
+                                                        <a class="dropdown-item" (click)="setSortBy('typeName')"><i [ngClass]="(sortField == 'typeName') ? 'fa fa-check color-blue' : 'fa fa-checka pl15 color-blue'" ></i> Type Name</a>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                            
+                                              
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mt10">
+                                <div class="card-block listCard">
+                                    <div class="row">
+                                        <!-- <div class="col-sm-12">
+                                            <ul class="scheduleday_wrapper tab">
+                                                <li data-tab="day-1" class="scheduleday_title col-sm" *ngFor="let dates of distinctDates; let i = index">
+                                                    <div class="scheduleday_title_content">
+                                                        <h6 style="color:;">Day {{i+1}}</h6>
+                                                        <div class="scheduleday_desc">{{dates}}
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div> -->
+                                        <!-- <div class="col-sm-12">
+                                            <div class="customContainer">
+                                                <div class="dateBoxHeader" >
+                                                    <div style="width:150px; border-right:1px solid #000; padding : 15px; background: #ddd" *ngFor="let dates of distinctDates2; let i = index" [ngClass]="i === 0 ? 'w105' : ''">
+                                                            {{dates}}
+                                                        </div>
+                                                </div>
+                                                
+                                                <div class="dateBox" *ngFor="let time of times;" style="display: inline-flex;">
+                                                    <div class="dateField">{{time.name}}</div>
+                                                    <div style="min-width:150px; border-right:1px solid #ddd; padding : 15px;" *ngFor="let dates of distinctDates; let i = index" [ngClass]="i === 0 ? '' : ''">
+                                                        <p class="mb5 cursor-pointer" style="padding-left: 5px;" *ngFor="let item of calData[dates][time.key]" [ngStyle]="{'border-left' : getTrackBorderForCalendar(item)}">
+                                                            {{getTrack(item).name}}
+                                                        </p>
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                        </div> -->
+
+
+                                        <!-- --------------------New UI------------------------------------- -->
+                                        <div class="col-sm-12"  *ngIf="!loading">
+                                            <div class="col-sm-12" style="background: #007aff; padding: 15px; color: #fff; font-weight: 700;">
+                                                <div class="col-sm-12" style="display: -webkit-inline-box;">
+                                                    <span><i class="fa fa-chevron-left cursor-pointer" (click)="previousDateSelector()"></i></span>
+                                                    <div class="col-sm-1">
+                                                        &nbsp;
+                                                    </div>
+                                                    <div class="col-sm " *ngFor="let k of calSelectedDates">
+                                                        {{k.value}}
+                                                    </div>
+                                                    <span><i class="fa fa-chevron-right cursor-pointer" (click)="nextDateSelector()"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 plr0" style="max-height: 397px; overflow: scroll;">
+                                                    <div class="col-sm-12" *ngFor="let time of times;">
+                                                            <div class="col-sm-12 plr0 timeBox2">
+                                                                <div class="col-sm-12 plr0 text-muted " style="padding-top: 5px; font-family: Montserrat,sans-serif!important;">
+                                                                    {{time.name}}
+                                                                </div>
+                                                                <div class="col-sm-12 plr0" style="display: -webkit-inline-box;">
+                                                                    <div class="col-sm-1">
+                                                                        &nbsp;
+                                                                    </div>
+                                                                    <div class="vl"></div>
+                                                                    <div class="col-sm">
+                                                                        <div style="width:90%" class="ellipses" *ngIf="calData[calSelectedDates[0].key] != null">
+                                                                            <p class="mb5 cursor-pointer" style="padding-left: 5px; background: #eee;" *ngFor="let item of calData[calSelectedDates[0].key][time.key]" [ngStyle]="{'border-left' : getTrackBorderForCalendar(item)}" (click)="openSession(headerPickerSession,time,calSelectedDates[0], item)">
+                                                                                {{getTrack(item).name}}
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="vl"></div>
+                                                                    <div class="col-sm">
+                                                                        <div style="width:90%" class="ellipses" *ngIf="calData[calSelectedDates[1].key] != null">
+                                                                            <p class="mb5 cursor-pointer" style="padding-left: 5px; background: #eee;" *ngFor="let item of calData[calSelectedDates[1].key][time.key]" [ngStyle]="{'border-left' : getTrackBorderForCalendar(item)}" (click)="openSession(headerPickerSession,time,calSelectedDates[1], item)">
+                                                                                {{getTrack(item).name}}
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="vl"></div>
+                                                                    <div class="col-sm">
+                                                                        <div style="width:90%" class="ellipses" *ngIf="calData[calSelectedDates[2].key] != null">
+                                                                            <p class="mb5 cursor-pointer" style="padding-left: 5px; background: #eee;" *ngFor="let item of calData[calSelectedDates[2].key][time.key]" [ngStyle]="{'border-left' : getTrackBorderForCalendar(item)}" (click)="openSession(headerPickerSession,time,calSelectedDates[2], item)">
+                                                                                {{getTrack(item).name}}
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>            
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<div id="mySidenav" class="sidenav">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm-12" style="border-bottom: 2px solid #cdcdcd;">
+                <h5 class="color-white">Cart&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-usd"></i>{{totalCartValue}}</h5>
+                <span class="pull-right cartClose color-white" (click)="hideCart()">&times;</span>
+            </div>
+            <div class="col-sm-12 mt10">
+                <!-- <form> -->
+                    <div class="form-group color-white">
+                        <label for="exampleInputEmail1">Budget</label>
+                        <input type="text" class="form-control form-control-sm" name="budget" aria-describedby="Budget" placeholder="Budget" [(ngModel)]="budgetLimit.value" (keyup)="setBudgetLimit()">
+                    </div>
+                    <div class="progress" style="margin-top: -10px; margin-bottom: 5px;" *ngIf="budgetLimit.value != null && budgetLimit.value != ''">
+                        <div class="{{cartProgressClass}}" role="progressbar" [ngStyle]="{'width': getCartProgressMaxValue()}" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                <!-- </form> -->
+                <div class="col-sm-12 pl0 pr0 feeListBox">
+                    <div class="col-sm-12 feeList" *ngFor="let session of cartItems">
+                        <div style="width:100%" class="ellipses" placement="bottom" ngbTooltip="{{session.name}}">
+                            <p class="mb0">[{{session.code}}] {{session.name}} <i class="fa fa-trash pull-right feeItemDelete" (click)="removeItemFee(session)"></i></p>
+                            <p class="mb0"><i class="fa fa-usd"> {{session.typeColor}}</i></p>
+                        </div>
+                    </div>
+                </div>        
+            </div>                                                
+        </div>
+    </div>
+</div>
