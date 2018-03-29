@@ -37,6 +37,7 @@ export class SessionComponent implements OnInit {
   calDates = [];
   calSelectedDates = [];
   currentTrackSession = [];
+  sessionTooltipRequestExecuting = false;
   times = [{key : '08', name : '08:00 AM'},{key : '09', name : '09:00 AM'},{key : '10', name : '10:00 AM'},
   {key : '11', name : '11:00 AM'},{key : '12', name : '12:00 PM'},{key : '13', name : '01:00 PM'},{key : '14', name : '02:00 PM'}
 ,{key : '15', name : '03:00 PM'},{key : '16', name : '04:00 PM'},{key : '17', name : '05:00 PM'}];
@@ -116,6 +117,20 @@ export class SessionComponent implements OnInit {
 
         });
     })
+  }
+
+  getToolTipForTrackSection(arg2, arg3, arg4) {
+    // if(this.sessionTooltipRequestExecuting == true) {
+    //   return;
+    // }
+    // this.sessionTooltipRequestExecuting = true;
+    // let params = new URLSearchParams();
+    // params.set('time', arg3.key + ' ' + arg2.name);
+    // params.set('trackId', arg4);
+    // this.dataService.getSessionDataByTrack(params).subscribe(resp => {
+    //     this.sessionTooltipRequestExecuting = false;
+    //     return resp.body['data'].length + 'Session associated with this track at this time.';
+    // })
   }
 
   openSpeaker(content, speaker) {

@@ -1,6 +1,5 @@
 <app-navbar></app-navbar>
 <span class="cartBox" placement="left" ngbTooltip="Show Cart" (click)="showCart()" ><i class="fa fa-caret-left"></i></span>
-<span class="cartBox2" placement="left" ngbTooltip="Show Cart" (click)="showCart()" ><i class="fa fa-opencart"></i></span>
 
 <!-- <span class="cartBox" placement="left" ngbTooltip="Show Cart" (click)="showCart()" ><i class="fa fa-shopping-cart"></i></span> -->
 <ng-template #headerPickerSession let-c="close" let-d="dismiss">
@@ -51,7 +50,7 @@
        </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn btn-blue btn-outline-dark" (click)="c('Close click')">Close</button>
+        <button type="button" class="btn btn btn-blue btn-outline-dark cursor-pointer" (click)="c('Close click')">Close</button>
     </div>
 </ng-template>
 <!-- <button (click)="toggleSpinner()">Toggle</button>   -->
@@ -167,37 +166,37 @@
                                                     <span><i class="fa fa-chevron-right cursor-pointer" (click)="nextDateSelector()"></i></span>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-12 plr0" style="max-height: 397px; overflow: scroll;">
-                                                    <div class="col-sm-12" *ngFor="let time of times;">
+                                            <div class="col-sm-12 plr0 calScroll">
+                                                    <div class="col-sm-12 plr0" *ngFor="let time of times;">
                                                             <div class="col-sm-12 plr0 timeBox2">
-                                                                <div class="col-sm-12 plr0 text-muted " style="padding-top: 5px; font-family: Montserrat,sans-serif!important;">
+                                                                <!-- <div class="col-sm-12 plr0 text-muted " style="padding-top: 5px; font-family: Montserrat,sans-serif!important;">
                                                                     {{time.name}}
-                                                                </div>
-                                                                <div class="col-sm-12 plr0" style="display: -webkit-inline-box;">
-                                                                    <div class="col-sm-1">
-                                                                        &nbsp;
+                                                                </div> -->
+                                                                <div class="col-sm-12" style="display: -webkit-box;">
+                                                                    <div style="min-width:90px; padding-top: 20px;" class="text-muted vl">
+                                                                        {{time.name}}
                                                                     </div>
-                                                                    <div class="vl"></div>
-                                                                    <div class="col-sm">
-                                                                        <div style="width:90%" class="ellipses" *ngIf="calData[calSelectedDates[0].key] != null">
-                                                                            <p class="mb5 cursor-pointer" style="padding-left: 5px; background: #eee;" *ngFor="let item of calData[calSelectedDates[0].key][time.key]" [ngStyle]="{'border-left' : getTrackBorderForCalendar(item)}" (click)="openSession(headerPickerSession,time,calSelectedDates[0], item)">
-                                                                                {{getTrack(item).name}}
+                                                                    <!-- <div class="vl">&nbsp;</div> -->
+                                                                    <div class="col-sm vl">
+                                                                        <div style="width:100%" class="ellipses" *ngIf="calData[calSelectedDates[0].key] != null">
+                                                                            <p class="mb5 cursor-pointer" style="padding-left: 5px; background: #eee;" *ngFor="let item of calData[calSelectedDates[0].key][time.key]" [ngStyle]="{'border-left' : getTrackBorderForCalendar(item)}" (click)="openSession(headerPickerSession,time,calSelectedDates[0], item)" ngbTooltip="{{getToolTipForTrackSection(time,calSelectedDates[0], item)}}">
+                                                                                {{getTrack(item).name}}<i class="fa fa-eye pull-right" style="margin-right : 10px; margin-top: 3px;"></i>
                                                                             </p>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="vl"></div>
-                                                                    <div class="col-sm">
-                                                                        <div style="width:90%" class="ellipses" *ngIf="calData[calSelectedDates[1].key] != null">
+                                                                    <!-- <div class="vl"></div> -->
+                                                                    <div class="col-sm vl">
+                                                                        <div style="width:100%" class="ellipses" *ngIf="calData[calSelectedDates[1].key] != null">
                                                                             <p class="mb5 cursor-pointer" style="padding-left: 5px; background: #eee;" *ngFor="let item of calData[calSelectedDates[1].key][time.key]" [ngStyle]="{'border-left' : getTrackBorderForCalendar(item)}" (click)="openSession(headerPickerSession,time,calSelectedDates[1], item)">
-                                                                                {{getTrack(item).name}}
+                                                                                {{getTrack(item).name}}<i class="fa fa-eye pull-right" style="margin-right : 10px; margin-top: 3px;"></i>
                                                                             </p>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="vl"></div>
-                                                                    <div class="col-sm">
-                                                                        <div style="width:90%" class="ellipses" *ngIf="calData[calSelectedDates[2].key] != null">
+                                                                    <!-- <div class="vl"></div> -->
+                                                                    <div class="col-sm vl">
+                                                                        <div style="width:100%" class="ellipses" *ngIf="calData[calSelectedDates[2].key] != null">
                                                                             <p class="mb5 cursor-pointer" style="padding-left: 5px; background: #eee;" *ngFor="let item of calData[calSelectedDates[2].key][time.key]" [ngStyle]="{'border-left' : getTrackBorderForCalendar(item)}" (click)="openSession(headerPickerSession,time,calSelectedDates[2], item)">
-                                                                                {{getTrack(item).name}}
+                                                                                {{getTrack(item).name}}<i class="fa fa-eye pull-right" style="margin-right : 10px; margin-top: 3px;"></i>
                                                                             </p>
                                                                         </div>
                                                                     </div>
