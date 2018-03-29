@@ -167,7 +167,7 @@ export class SessionComponent implements OnInit {
           color = v.color;
         }
     })
-    return '5px solid '+color;
+    return '7px solid '+color;
   }
 
   setBudgetLimit() {
