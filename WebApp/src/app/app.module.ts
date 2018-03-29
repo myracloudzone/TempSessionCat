@@ -12,6 +12,7 @@ import { NgModule } from '@angular/core';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { AppComponent } from './app.component';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+import { SessionModuleComponent } from './modules/session/session-module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
     SharedModule,
     LoginModuleComponent,
     HomeModuleComponent,
+    SessionModuleComponent,
     Ng4LoadingSpinnerModule.forRoot(),
     RouterModule.forRoot([
       { path: '**', redirectTo: 'home' }
@@ -29,4 +31,6 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }  
+export class AppModule { 
+  
+}  
