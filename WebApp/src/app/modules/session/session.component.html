@@ -157,13 +157,16 @@
                                             <div class="col-sm-12" style="background: #007aff; padding: 15px; color: #fff; font-weight: 700;">
                                                 <div class="col-sm-12" style="display: -webkit-inline-box;">
                                                     <span><i class="fa fa-chevron-left cursor-pointer" (click)="previousDateSelector()"></i></span>
-                                                    <div class="col-sm-1">
+                                                    <div style="min-width: 70px;">
                                                         &nbsp;
                                                     </div>
-                                                    <div class="col-sm " *ngFor="let k of calSelectedDates">
-                                                        {{k.value}}
+                                                    <div class="col-sm" *ngFor="let k of calSelectedDates; let i = index">
+                                                        <div style="width:100%" class="ellipses">
+                                                                {{k.value}}
+                                                            <span *ngIf="i == calSelectedDates.length - 1"><i class="fa fa-chevron-right cursor-pointer pull-right" style="margin-top:5px;" (click)="nextDateSelector()"></i></span>
+                                                        </div>
                                                     </div>
-                                                    <span><i class="fa fa-chevron-right cursor-pointer" (click)="nextDateSelector()"></i></span>
+                                                    
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 plr0 calScroll">
@@ -173,7 +176,7 @@
                                                                     {{time.name}}
                                                                 </div> -->
                                                                 <div class="col-sm-12 plr0" style="display: -webkit-box;">
-                                                                    <div style="min-width:100px; padding-top: 20px; padding-left: 15px; padding-right: 15px;" class="text-muted vl">
+                                                                    <div style="min-width:110px; padding-top: 20px; padding-left: 15px; padding-right: 15px;" class="text-muted vl">
                                                                         {{time.name}}
                                                                     </div>
                                                                     <!-- <div class="vl">&nbsp;</div> -->
