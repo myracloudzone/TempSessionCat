@@ -62,7 +62,7 @@
     <div id="page-content-wrapper">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-2">
+                <div class="col-sm-12 col-md-2">
                     <div class="card">
                         <div class="card-block filter-block">
                             <b>Filters</b> <span class="pull-right color-blue txt cursor-pointer clearAll" (click)="clearAllFilter()">Clear All</span>
@@ -82,7 +82,7 @@
                         </div>
                     </div>        
                 </div>
-                <div class="col-sm-10 pl0">
+                <div class="col-sm-12 col-md-10 pl0">
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-panel active" id="reg">
                             <div class="card">
@@ -154,7 +154,7 @@
 
                                         <!-- --------------------New UI------------------------------------- -->
                                         <div class="col-sm-12"  *ngIf="!loading">
-                                            <div class="col-sm-12 plr0" style="background: #cfcfcf; padding-top: 15px; padding-bottom: 15px; padding-left: 0px; padding-right: 0px; color: rgb(41, 37, 37); font-weight: 500; border-bottom: 2px solid #a2a1a1">
+                                            <div class="col-sm-12 plr0" style="background: #cfcfcf; padding-top: 15px; padding-bottom: 15px; padding-left: 0px; padding-right: 0px; color: rgb(41, 37, 37); font-weight: 600; border-bottom: 2px solid #a2a1a1">
                                                 <div class="col-sm-12 plr0" style="display: -webkit-inline-box;">
                                                     <!-- <div style="min-width: 70px;">
                                                         &nbsp;
@@ -162,11 +162,11 @@
                                                     <div style="min-width:110px; padding-left: 15px; padding-right: 15px;" class="text-muted">
                                                         <span><i class="fa fa-chevron-left cursor-pointer" (click)="previousDateSelector()"></i></span>
                                                     </div>
-                                                        <div class="col-sm plr0" *ngFor="let k of calSelectedDates; let i = index">
+                                                        <div class="col-sm" *ngFor="let k of calSelectedDates; let i = index">
                                                             <div style="width:100%" class="ellipses">
                                                                     {{k.value}}
                                                             </div>
-                                                            <span *ngIf="i == calSelectedDates.length - 1"><i class="fa fa-chevron-right cursor-pointer pull-right text-muted" style="margin-top:-20px; margin-right: 15px;" (click)="nextDateSelector()"></i></span>
+                                                            <span *ngIf="i == calSelectedDates.length - 1"><i class="fa fa-chevron-right cursor-pointer pull-right text-muted" style="margin-top:-20px; margin-right: 3px;" (click)="nextDateSelector()"></i></span>
                                                         </div>
                                                 </div>
                                             </div>
@@ -186,6 +186,9 @@
                                                                             <p class="mb5 cursor-pointer" style="padding-left: 5px; background: #eee;" *ngFor="let item of calData[calSelectedDates[0].key][time.key]" [ngStyle]="{'border-left' : getTrackBorderForCalendar(item)}" (click)="openSession(headerPickerSession,time,calSelectedDates[0], item)" ngbTooltip="{{getToolTipForTrackSection(time,calSelectedDates[0], item)}}">
                                                                                 {{getTrack(item).name}}<i class="fa fa-eye pull-right" style="margin-right : 10px; margin-top: 3px;"></i>
                                                                             </p>
+                                                                            <!-- <span class="mb5 cursor-pointer" style="padding-left: 5px; background: #eee; display: block; width: fit-content;" *ngFor="let item of calData[calSelectedDates[0].key][time.key]" [ngStyle]="{'border-left' : getTrackBorderForCalendar(item)}" (click)="openSession(headerPickerSession,time,calSelectedDates[0], item)" ngbTooltip="{{getToolTipForTrackSection(time,calSelectedDates[0], item)}}">
+                                                                                    {{getTrack(item).name}}<i class="fa fa-eye" style="margin-right : 10px; margin-top: 3px;"></i>
+                                                                            </span> -->
                                                                         </div>
                                                                     </div>
                                                                     <!-- <div class="vl"></div> -->
