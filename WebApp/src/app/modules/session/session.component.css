@@ -219,7 +219,7 @@ hr {
     box-sizing: border-box;
 }
 .calScroll {
-    max-height: calc(100vh - 307px); 
+    max-height: calc(100vh - 313px); 
     overflow: scroll;
 }
 .listCard {
@@ -253,8 +253,6 @@ hr {
 #sidebar-wrapper {
     display: none !important;
 }
-
-
 .cartBox {
     left: 99%;
     font-size: 50px;
@@ -263,7 +261,6 @@ hr {
     margin-left: -4px;
     color: #777373;
 }
-
 .cartBox2 {
     left: 100%;
     font-size: 32px;
@@ -397,8 +394,8 @@ hr {
     /* height: auto;
     position: relative;
     margin-top: 0px; */
-    padding-top: 25px;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 5px;
 }
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}

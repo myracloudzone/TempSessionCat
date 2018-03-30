@@ -20,11 +20,11 @@
 }
 .flex-list li {
 	flex-grow: 1;
-	font-family: ProximaNova-Light;
+	/* font-family: ProximaNova-Light; */
 	flex-basis: auto;
 	list-style-type: none;
 	margin: .25em 0;
-	font-size: 20px;
+	font-size: 17px;
 	color: #CCCCCC;
 	text-align: left;
     padding: 0 1em;

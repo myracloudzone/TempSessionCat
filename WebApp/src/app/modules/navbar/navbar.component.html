@@ -30,15 +30,16 @@
         </button>
         
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <div class="flex-list">
-                        <ul>
-                            <li class="siteLink pipe">Attendee</li>
-                            <li class="siteLink pipe">Exhibitors</li>
-                            <li class="siteLink pipe tabActive">Sessions</li>
-                            <li class="siteLink pipe">Speakers</li>
-                            <li class="siteLink">Tracks</li>
-                        </ul>
-                    </div>
+            <div class="flex-list">
+                <ul>
+                    <li class="siteLink pipe" (click)="goToState('/home')">Home</li>
+                    <li class="siteLink pipe">Attendee</li>
+                    <li class="siteLink pipe">Exhibitors</li>
+                    <li class="siteLink pipe tabActive" (click)="goToState('/session')">Sessions</li>
+                    <li class="siteLink pipe">Speakers</li>
+                    <li class="siteLink">Tracks</li>
+                </ul>
+            </div>
         </div>
      </nav>
  <!-- <div class="filters">

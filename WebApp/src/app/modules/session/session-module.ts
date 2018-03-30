@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { providers } from 'ng2-dnd';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from '../../app.component';
-import { NgModule } from '@angular/core';
+import { NgModule} from '@angular/core';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { TranslateModule, TranslateLoader, TranslateStaticLoader, TranslateService } from 'ng2-translate';
 import { NgSpinKitModule } from 'ng-spin-kit';

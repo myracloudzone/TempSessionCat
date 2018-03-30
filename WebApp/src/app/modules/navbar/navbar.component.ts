@@ -18,6 +18,10 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
+  goToState(state) {
+    location.href = state;
+  }
+
   toggleSideBar() {
     this.isSideToggled = !this.isSideToggled;
     $('#sidebar-wrapper').toggleClass('visible');

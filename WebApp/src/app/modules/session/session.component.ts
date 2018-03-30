@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, animate, style, state, transition, trigger } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 declare var $: any;
 declare var moment: any;
@@ -10,10 +10,18 @@ import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-session',
   templateUrl: './session.component.html',
-  styleUrls: ['./session.component.css']
+  styleUrls: ['./session.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('open', style({opacity: 1})),
+      state('closed', style({opacity: 0})),
+      transition('open <=> closed', animate( '1000ms')),
+    ])
+  ],
 })
 export class SessionComponent implements OnInit {
   loading = true;
+  state = 'open';
   obj = {loading : true};
   filters = [];
   sessionData = [];
@@ -38,14 +46,15 @@ export class SessionComponent implements OnInit {
   calSelectedDates = [];
   currentTrackSession = [];
   sessionTooltipRequestExecuting = false;
-  times = [{key : '08', name : '08:00 AM'},{key : '09', name : '09:00 AM'},{key : '10', name : '10:00 AM'},
-  {key : '11', name : '11:00 AM'},{key : '12', name : '12:00 PM'},{key : '13', name : '01:00 PM'},{key : '14', name : '02:00 PM'}
-,{key : '15', name : '03:00 PM'},{key : '16', name : '04:00 PM'},{key : '17', name : '05:00 PM'}];
+  times = [ {key : '08', name : '08:00 AM'}, {key : '09', name : '09:00 AM'}, {key : '10', name : '10:00 AM'},
+            {key : '11', name : '11:00 AM'}, {key : '12', name : '12:00 PM'}, {key : '13', name : '01:00 PM'},
+            {key : '14', name : '02:00 PM'}, {key : '15', name : '03:00 PM'}, {key : '16', name : '04:00 PM'},
+            {key : '17', name : '05:00 PM'} ];
 
   setScrollBar() {
-    if(window.navigator.platform.toLowerCase().indexOf('mac') < 0) {
-      var link = document.createElement( 'link' );
-      link.href = location.protocol+'//'+location.host+'/assets/css/customScrollBar.css';
+    if (window.navigator.platform.toLowerCase().indexOf('mac') < 0) {
+      const link = document.createElement( 'link' );
+      link.href = location.protocol + '//' + location.host + '/assets/css/customScrollBar.css';
       link.type = 'text/css';
       link.rel = 'stylesheet';
       link.media = 'screen,print';
@@ -54,48 +63,56 @@ export class SessionComponent implements OnInit {
   }
 
   nextDateSelector() {
-    if(this.calSelectedDates[2] != null) {
+    if (this.calSelectedDates[2] != null) {
       this.spinnerService.show();
-      var tempDate1 = this.calSelectedDates[1];
-      var tempDate2 = this.calSelectedDates[2];
-      var tempDate3 = moment(this.calSelectedDates[2].key, 'DD/MM/YYYY');
+      const tempDate1 = this.calSelectedDates[1];
+      const tempDate2 = this.calSelectedDates[2];
+      let tempDate3 = moment(this.calSelectedDates[2].key, 'DD/MM/YYYY');
       tempDate3.add(24, 'hours');
       tempDate3 = { key : tempDate3.format('DD/MM/YYYY'), value : tempDate3.format('dddd, MMMM DD YYYY')};
-      var found = false;
+      let found = false;
       this.calDates.forEach((v,k) => {
-          if(v.key == tempDate3.key) {
+          if (v.key == tempDate3.key) {
             found = true;
           }
       });
-      if(found) {
-        this.calSelectedDates = [];
-        this.calSelectedDates.push(tempDate1);
-        this.calSelectedDates.push(tempDate2);
-        this.calSelectedDates.push(tempDate3);
+      if (found) {
+        this.state = 'closed';
+        setTimeout(() => {
+          this.calSelectedDates = [];
+          this.calSelectedDates.push(tempDate1);
+          this.calSelectedDates.push(tempDate2);
+          this.calSelectedDates.push(tempDate3);
+          this.state = 'open';
+        }, 1000);
       }
       this.spinnerService.hide();
     }
   }
 
   previousDateSelector() {
-    if(this.calSelectedDates[0] != null) {
+    if (this.calSelectedDates[0] != null) {
       this.spinnerService.show();
-      var tempDate1 = this.calSelectedDates[1];
-      var tempDate2 = this.calSelectedDates[0];
-      var tempDate3 = moment(this.calSelectedDates[0].key, 'DD/MM/YYYY');
+      let tempDate1 = this.calSelectedDates[1];
+      let tempDate2 = this.calSelectedDates[0];
+      let tempDate3 = moment(this.calSelectedDates[0].key, 'DD/MM/YYYY');
       tempDate3.subtract(24, 'hours');
       tempDate3 = { key : tempDate3.format('DD/MM/YYYY'), value : tempDate3.format('dddd, MMMM DD YYYY')};
-      var found = false;
+      let found = false;
       this.calDates.forEach((v,k) => {
           if(v.key == tempDate3.key) {
             found = true;
           }
       });
-      if(found) {
-        this.calSelectedDates = [];
-        this.calSelectedDates.push(tempDate3);
-        this.calSelectedDates.push(tempDate2);
-        this.calSelectedDates.push(tempDate1);
+      if (found) {
+        this.state = 'closed';
+        setTimeout(() => {
+          this.calSelectedDates = [];
+          this.calSelectedDates.push(tempDate3);
+          this.calSelectedDates.push(tempDate2);
+          this.calSelectedDates.push(tempDate1);
+          this.state = 'open';
+        }, 1000);
       }
       this.spinnerService.hide();
     }
