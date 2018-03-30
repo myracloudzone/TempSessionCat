@@ -120,7 +120,12 @@
                             </div>
                             <div class="card mt10">
                                 <div class="card-block listCard">
-                                    <div class="row">
+                                    <div class="row" *ngIf="(sessionData == null || sessionData.length == 0) && !listLoading">
+                                        <div class="col-sm-12" style="padding-top: 10px;padding-bottom: 5px;padding-left: 25px; padding-right: 20px;">
+                                            <h6>No Record Found.</h6>
+                                        </div>
+                                    </div>  
+                                    <div class="row" *ngIf="(sessionData != null && sessionData.length != 0) && !listLoading">
                                         <!-- <div class="col-sm-12">
                                             <ul class="scheduleday_wrapper tab">
                                                 <li data-tab="day-1" class="scheduleday_title col-sm" *ngFor="let dates of distinctDates; let i = index">
@@ -151,7 +156,7 @@
                                             </div>
                                         </div> -->
 
-
+                                        
                                         <!-- --------------------New UI------------------------------------- -->
                                         <div class="col-sm-12"  *ngIf="!loading">
                                             <div class="col-sm-12 plr0" style="background: #cfcfcf; padding-top: 15px; padding-bottom: 15px; padding-left: 0px; padding-right: 0px; color: rgb(41, 37, 37); font-weight: 600; border-bottom: 2px solid #a2a1a1">
