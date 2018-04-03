@@ -67,6 +67,10 @@ export class SessionComponent implements OnInit {
     }
   }
 
+  getAMPMFormat(t) {
+    return moment('20/03/2018 ' + t, 'DD/MM/YYYY HH:mm').format('hh:mm A');
+  }
+
   nextDateSelector() {
     if (this.calSelectedDates[2] != null) {
       this.spinnerService.show();

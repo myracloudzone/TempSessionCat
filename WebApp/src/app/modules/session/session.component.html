@@ -252,9 +252,9 @@
                             <h6 style='color: #ddd'>{{id}}</h6>
                         </div>
                         <div style="width:100%" class="ellipses" placement="bottom" *ngFor="let t of newCartTimes[id]">
-                            <span style="color: #ddd">{{t}}</span>
+                            <span style="color: #ddd">{{getAMPMFormat(t)}}</span>
                             <ul style="margin-bottom: 0px;">
-                                <li *ngFor="let session of newCartData[id][t]" [ngStyle]="{'border-left': ('7px solid '+ session.trackColor)}" style="padding-left: 10px;">
+                                <li *ngFor="let session of newCartData[id][t]" [ngStyle]="{'border-left': ('7px solid '+ session.trackColor)}" style="padding-left: 10px;" ngbTooltip="{{session.name}}">
                                         {{session.name}} <i class="fa fa-trash pull-right feeItemDelete" (click)="removeItemFeeNew(id, t, session)"></i><br>
                                         [{{session.code}}]<br>
                                         ${{session.typeColor}}
