@@ -229,6 +229,25 @@ export class SessionComponent implements OnInit {
     }
   }
 
+  getCartProgressMaxValueNew() {
+    var total = 0;
+    var limit = parseInt(this.budgetLimit.value);
+    var per = (this.totalCartValue/limit)*100;
+    if(per > 100) {
+      this.cartProgressClass = 'progress-bar bg-danger';
+      return '100%';
+    } else {
+      if(per > 90) {
+        this.cartProgressClass = 'progress-bar bg-danger';
+      } else if(per > 60){
+        this.cartProgressClass = 'progress-bar bg-warning';
+      } else {
+        this.cartProgressClass = 'progress-bar bg-success';
+      }
+      return per+'%';
+    }
+  }
+
   constructor(private dataService: DataService, private spinnerService: Ng4LoadingSpinnerService, private modalService: NgbModal) {
     //  private spinnerService: Ng4LoadingSpinnerService,
   }
