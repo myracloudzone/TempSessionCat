@@ -543,6 +543,7 @@ export class SessionComponent implements OnInit {
                   }
                   if (this.newCartTimes[v.startDateString].indexOf(v.startTimeString) < 0) {
                     this.newCartTimes[v.startDateString].push(v.startTimeString);
+                    this.newCartTimes[v.startDateString] = this.sortTimeArray(this.newCartTimes[v.startDateString]);
                   }
 
                   this.newCartData[v.startDateString][v.startTimeString].push(v);
@@ -568,6 +569,19 @@ export class SessionComponent implements OnInit {
         return 0;
       }
     });
+  }
+
+  sortTimeArray(data) {
+    data = data.sort((a, b) => {
+      if (moment('20/02/2018 ' + a, 'DD/MM/YYYY HH:mm').valueOf() < moment('20/02/2018 ' + b,  'DD/MM/YYYY HH:mm').valueOf()) {
+        return -1;
+      } else if (moment('20/02/2018 ' + a,  'DD/MM/YYYY HH:mm').valueOf() > moment('20/02/2018 ' + b,  'DD/MM/YYYY HH:mm').valueOf()) {
+         return 1;
+      } else {
+        return 0;
+      }
+    });
+    return data;
   }
 
   removeItemFeeNew(date, time, session) {
@@ -618,6 +632,7 @@ export class SessionComponent implements OnInit {
           }
           if (this.newCartTimes[data.startDateString].indexOf(data.startTimeString) < 0) {
             this.newCartTimes[data.startDateString].push(data.startTimeString);
+            this.newCartTimes[data.startDateString] = this.sortTimeArray(this.newCartTimes[data.startDateString]);
           }
 
           this.newCartData[data.startDateString][data.startTimeString].push(data);
