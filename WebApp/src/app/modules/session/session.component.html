@@ -23,7 +23,7 @@
                                     <div style="width : 80%" class="ellipses">
                                         <a class="cursor-pointer regular-strong" style="width : 100%" ngbTooltip="{{data.name}}" placement="bottom" (click)="data.showDetails = !data.showDetails"><i [ngClass]="(data.showDetails == null || data.showDetails == false) ? 'fa fa-chevron-circle-right dropLink color-blue' : 'fa fa-chevron-circle-down dropLink color-blue'" ></i> {{data.name}} [{{data.code}}]</a>  
                                     </div>
-                                    <div><i [ngClass]="(data.isFav == null || data.isFav == false) ? 'fa fa-star-o cursor-pointer pull-right fav' : 'fa fa-star   cursor-pointer  fav pull-right'" (click)="addToCart(data)">
+                                    <div><i [ngClass]="(data.isFav == null || data.isFav == false) ? 'fa fa-star-o cursor-pointer pull-right fav' : 'fa fa-star   cursor-pointer  fav pull-right'" (click)="addToCartNew(data)">
                                             <span class="duration">
                                             <div class="progress" style="width : 100px;">
                                                     <div class="progress-bar progress-bar-success" ngbTooltip="{{getHours(data.duration)}}" role="progressbar"
@@ -40,7 +40,7 @@
                                         </div>
                                         <p class="mb0 mt10 subHeading"><b>Type:</b> {{data.typeName}}</p>
                                         <p class="mb0 mt10 subHeading"><b>Track:</b> {{data.trackName}}</p>
-                                        <p class="mt10 subHeading" *ngIf="data.typeName == 'Hands on Lab' || data.typeName == 'Activity' || data.typeName == 'Workshop'"><b>Fee: </b>${{data.typeColor}}</p>
+                                        <p class="mt10 subHeading"><b>Fee: </b>${{data.typeColor}}</p>
                                     </div>
                                 </div>
                         </div>
@@ -247,10 +247,22 @@
                     </div>
                 </div>
                 <div class="col-sm-12 mt10 feeListBox pr5"> 
-                    <div class="col-sm-12 feeList" *ngFor="let session of cartItems">
-                        <div style="width:100%" class="ellipses" placement="bottom" ngbTooltip="{{session.name}}">
-                            <p class="mb0">[{{session.code}}] {{session.name}} <i class="fa fa-trash pull-right feeItemDelete" (click)="removeItemFee(session)"></i></p>
-                            <p class="mb0"><i class="fa fa-usd"> {{session.typeColor}}</i></p>
+                    <div class="col-sm-12 feeList" *ngFor="let id of newCartItemsIds">
+                        <div class="col-sm-12 plr0" style="border-bottom: 2px solid #ddd">
+                            <h6 style='color: #ddd'>{{id}}</h6>
+                        </div>
+                        <div style="width:100%" class="ellipses" placement="bottom" *ngFor="let t of newCartTimes[id]">
+                            <span style="color: #ddd">{{t}}</span>
+                            <ul style="margin-bottom: 0px;">
+                                <li *ngFor="let session of newCartData[id][t]" [ngStyle]="{'border-left': ('7px solid '+ session.trackColor)}" style="padding-left: 10px;">
+                                        {{session.name}} <i class="fa fa-trash pull-right feeItemDelete" (click)="removeItemFeeNew(id, t, session)"></i><br>
+                                        [{{session.code}}]<br>
+                                        ${{session.typeColor}}
+                                </li>    
+                            </ul>
+                            <!-- <div class="col-sm-12 plr0" style="margin-left: 40px; border-bottom: 1px solid #ddd;" *ngFor="let session of newCartData[id][t]">
+                                {{session.name}}
+                            </div>    -->
                         </div>
                     </div>
                 </div>        
@@ -258,3 +270,4 @@
         </div>
     </div>
 </div>
+

@@ -234,7 +234,7 @@ export class SessionComponent implements OnInit {
   }
 
   showCart() {
-    document.getElementById('mySidenav').style.width = '350px';
+    document.getElementById('mySidenav').style.width = '400px';
   }
   hideCart() {
     document.getElementById('mySidenav').style.width = '0px';
@@ -553,14 +553,83 @@ export class SessionComponent implements OnInit {
             this.loading = false;
         });
         console.log(this.newCartData);
+        this.sortDateArray();
       }, 500);
+    });
+  };
+
+  sortDateArray() {
+    this.newCartItemsIds.sort((a, b) => {
+      if (moment(a, 'DD/MM/YYYY').valueOf() < moment(b, 'DD/MM/YYYY').valueOf()) {
+        return -1;
+      } else if (moment(a, 'DD/MM/YYYY').valueOf() > moment(b, 'DD/MM/YYYY').valueOf()) {
+         return 1;
+      } else {
+        return 0;
+      }
     });
   }
 
-  // getCartItems(id) {
-  //   alert(id);
-  //   return this.newCartTimes[id];
-  // }
+  removeItemFeeNew(date, time, session) {
+    const data = [];
+    this.newCartData[date][time].forEach((v, k) => {
+      console.log(v);
+      if (v.id != session.id) {
+          data.push(v);
+      }
+    });
+    console.log(data)
+    if (data.length == 0) {
+      this.newCartTimes[date].splice(this.newCartTimes[date].indexOf(time), 1);
+      delete this.newCartData[date][time];
+    } else {
+      this.newCartData[date][time] = data;
+    }
+    if ($.isEmptyObject(this.newCartData[date])) {
+      this.newCartItemsIds.splice(this.newCartItemsIds.indexOf(date), 1);
+    }
+    if(session.typeColor != null) {
+      const val = parseInt(session.typeColor);
+      if (!isNaN(val)) {
+        this.totalCartValue = this.totalCartValue - val;
+      }
+    }
+    this.sortDateArray();
+  }
+
+  addToCartNew(data) {
+    console.log(data);
+    if(data.isFav == null || data.isFav == false) {
+      data.isFav = true;
+      if (data.typeColor != null) {
+        const val = parseInt(data.typeColor);
+        if (!isNaN(val)) {
+          if (this.newCartData[data.startDateString] == null) {
+             this.newCartData[data.startDateString] = {};
+          }
+          if (this.newCartData[data.startDateString][data.startTimeString] == null) {
+            this.newCartData[data.startDateString][data.startTimeString] = [];
+          }
+          if (this.newCartItemsIds.indexOf(data.startDateString) < 0) {
+            this.newCartItemsIds.push(data.startDateString);
+          }
+          if (this.newCartTimes[data.startDateString] == null) {
+            this.newCartTimes[data.startDateString] = [];
+          }
+          if (this.newCartTimes[data.startDateString].indexOf(data.startTimeString) < 0) {
+            this.newCartTimes[data.startDateString].push(data.startTimeString);
+          }
+
+          this.newCartData[data.startDateString][data.startTimeString].push(data);
+          this.totalCartValue = this.totalCartValue + val;
+        }
+      }
+    } else {
+      data.isFav = false;
+      this.removeItemFeeNew(data.startDateString, data.startTimeString, data);
+    }
+    this.sortDateArray();
+  }
 
   getHours(min) {
     let h = parseInt('' + (min/60));
