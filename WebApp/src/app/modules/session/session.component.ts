@@ -33,7 +33,11 @@ export class SessionComponent implements OnInit {
   maxDuration = 0;
   listLoading = true;
   sortField = 'name';
+  // ----------New-----------
   cartItemsIds = [];
+  newCartItemsIds = [];
+  newCartTimes = {};
+  // ------------New---------
   cartItems = [];
   budgetLimit = {value : null};
   cartProgressClass = 'progress-bar bg-success';
@@ -45,6 +49,7 @@ export class SessionComponent implements OnInit {
   calDates = [];
   calSelectedDates = [];
   currentTrackSession = [];
+  newCartData = {};
   sessionTooltipRequestExecuting = false;
   times = [ {key : '08', name : '08:00 AM'}, {key : '09', name : '09:00 AM'}, {key : '10', name : '10:00 AM'},
             {key : '11', name : '11:00 AM'}, {key : '12', name : '12:00 PM'}, {key : '13', name : '01:00 PM'},
@@ -79,10 +84,12 @@ export class SessionComponent implements OnInit {
       if (found) {
         this.state = 'closed';
         setTimeout(() => {
-          this.calSelectedDates = [];
-          this.calSelectedDates.push(tempDate1);
-          this.calSelectedDates.push(tempDate2);
-          this.calSelectedDates.push(tempDate3);
+        this.calSelectedDates = [];
+        this.calSelectedDates.push(tempDate1);
+        this.calSelectedDates.push(tempDate2);
+        this.calSelectedDates.push(tempDate3);
+        }, 300);
+        setTimeout(() => {
           this.state = 'open';
         }, 1000);
       }
@@ -484,7 +491,6 @@ export class SessionComponent implements OnInit {
     this.filterArrayObject['dates'] = [];
     this.filterArrayObject['term'] = '';
   };
-
   getSessionData() {
     this.spinnerService.show();
     this.listLoading = true;
@@ -492,7 +498,7 @@ export class SessionComponent implements OnInit {
     this.loading = true;
     this.filterArrayObject['sortField'] = this.sortField;
     this.dataService.getData(this.filterArrayObject).subscribe(resp => {
-      setTimeout(()=> {
+      setTimeout(() => {
         this.spinnerService.hide();
         this.sessionData = resp.body['data'];
         this.maxDuration = resp.body['maxDuration'];
@@ -502,39 +508,62 @@ export class SessionComponent implements OnInit {
         this.distinctDates2 = ['Date/Time'];
         this.distinctDates = [];
         this.calData = {};
-        this.sessionData.forEach((v,k) => {
-          if(this.calData[v.startDateString] == null) {
-            this.calData[v.startDateString] = {};
-          }
-          if(this.calData[v.startDateString][v.startTimeHour] == null) {
-            this.calData[v.startDateString][v.startTimeHour] = [];
-          }
-          if(this.calData[v.startDateString][v.startTimeHour].indexOf(v.trackId) < 0) {
-            this.calData[v.startDateString][v.startTimeHour].push(v.trackId);
-          }
-          if(this.distinctDates.indexOf(v.startDateString) < 0) {
-            this.distinctDates.push(v.startDateString);
-            this.distinctDates2.push(v.startDateString);
-          }
-          if(v.isFav == true) {
-            this.cartItems.push(v);
-            this.cartItemsIds.push(v.id);
-            if(v.typeColor != null) {
-              var val = parseInt(v.typeColor);
-              if(!isNaN(val)) {
-                this.totalCartValue = this.totalCartValue + val;
+        this.sessionData.forEach((v, k) => {
+            if (this.calData[v.startDateString] == null) {
+              this.calData[v.startDateString] = {};
+            }
+            if (this.calData[v.startDateString][v.startTimeHour] == null) {
+              this.calData[v.startDateString][v.startTimeHour] = [];
+            }
+            if (this.calData[v.startDateString][v.startTimeHour].indexOf(v.trackId) < 0) {
+              this.calData[v.startDateString][v.startTimeHour].push(v.trackId);
+            }
+            if (this.distinctDates.indexOf(v.startDateString) < 0) {
+              this.distinctDates.push(v.startDateString);
+              this.distinctDates2.push(v.startDateString);
+            }
+            if (v.isFav == true) {
+              this.cartItems.push(v);
+              this.cartItemsIds.push(v.id);
+
+              if (v.typeColor != null) {
+                let val = parseInt(v.typeColor);
+                if (!isNaN(val)) {
+                  if (this.newCartData[v.startDateString] == null) {
+                     this.newCartData[v.startDateString] = {};
+                  }
+                  if (this.newCartData[v.startDateString][v.startTimeString] == null) {
+                    this.newCartData[v.startDateString][v.startTimeString] = [];
+                  }
+                  if (this.newCartItemsIds.indexOf(v.startDateString) < 0) {
+                    this.newCartItemsIds.push(v.startDateString);
+                  }
+                  if (this.newCartTimes[v.startDateString] == null) {
+                    this.newCartTimes[v.startDateString] = [];
+                  }
+                  if (this.newCartTimes[v.startDateString].indexOf(v.startTimeString) < 0) {
+                    this.newCartTimes[v.startDateString].push(v.startTimeString);
+                  }
+
+                  this.newCartData[v.startDateString][v.startTimeString].push(v);
+                  this.totalCartValue = this.totalCartValue + val;
+                }
               }
             }
-          }
-          this.loading = false;
+            this.loading = false;
         });
-        console.log(this.calData);
-      },500);
+        console.log(this.newCartData);
+      }, 500);
     });
   }
 
+  // getCartItems(id) {
+  //   alert(id);
+  //   return this.newCartTimes[id];
+  // }
+
   getHours(min) {
-    let h = parseInt(''+(min/60));
+    let h = parseInt('' + (min/60));
     let m = min%60;
     var t = h + 'h : '+m+'m';
     return t;

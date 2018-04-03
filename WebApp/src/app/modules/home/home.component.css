@@ -259,6 +259,22 @@ hr {
     color: #777373;
 }
 
+.cartBox2 {
+    left: 100%;
+    font-size: 32px;
+    position: absolute;
+    cursor: pointer;
+    margin-left: -80px;
+    margin-top: 21px;
+    color: #07244e;
+    z-index: 40;
+}
+
+.pr5 {
+    padding-left: 10px;
+    padding-right: 10px;    
+}
+
 .sidenav {
     height: 100%;
     width: 0;
@@ -266,10 +282,10 @@ hr {
     z-index: 1;
     top: 0;
     right: 0;
-    background-color: #111;
+    background-color: #fff;
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 30px;
+    background-color: rgba(0,0,0, .5);
 }
 
 .sidenav a {

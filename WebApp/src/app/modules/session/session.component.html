@@ -232,12 +232,12 @@
 <div id="mySidenav" class="sidenav">
     <div class="row">
         <div class="col-sm-12">
-            <div class="col-sm-12" style="border-bottom: 2px solid #cdcdcd;">
+            <div class="col-sm-12" style="border-bottom: 2px solid #cdcdcd; background: #000; padding-top : 30px;">
                 <h5 class="color-white">Cart&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-usd"></i>{{totalCartValue}}</h5>
                 <span class="pull-right cartClose color-white" (click)="hideCart()">&times;</span>
             </div>
-            <div class="col-sm-12 mt10">
-                <!-- <form> -->
+            <div class="col-sm-12 plr0">
+                <div class="col-sm-12" style='background: #000; padding-top: 10px; padding-bottom: 10px;'>
                     <div class="form-group color-white">
                         <label for="exampleInputEmail1">Budget</label>
                         <input type="text" class="form-control form-control-sm" name="budget" aria-describedby="Budget" placeholder="Budget" [(ngModel)]="budgetLimit.value" (keyup)="setBudgetLimit()">
@@ -245,8 +245,8 @@
                     <div class="progress" style="margin-top: -10px; margin-bottom: 5px;" *ngIf="budgetLimit.value != null && budgetLimit.value != ''">
                         <div class="{{cartProgressClass}}" role="progressbar" [ngStyle]="{'width': getCartProgressMaxValue()}" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                <!-- </form> -->
-                <div class="col-sm-12 pl0 pr0 feeListBox">
+                </div>
+                <div class="col-sm-12 mt10 feeListBox pr5"> 
                     <div class="col-sm-12 feeList" *ngFor="let session of cartItems">
                         <div style="width:100%" class="ellipses" placement="bottom" ngbTooltip="{{session.name}}">
                             <p class="mb0">[{{session.code}}] {{session.name}} <i class="fa fa-trash pull-right feeItemDelete" (click)="removeItemFee(session)"></i></p>

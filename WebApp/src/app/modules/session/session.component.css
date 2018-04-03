@@ -271,6 +271,10 @@ hr {
     color: #07244e;
     z-index: 40;
 }
+.pr5 {
+    padding-left: 10px;
+    padding-right: 10px;    
+}
 
 .sidenav {
     height: 100%;
@@ -279,10 +283,12 @@ hr {
     z-index: 1;
     top: 0;
     right: 0;
-    background-color: #111;
+    background-color: #fff;
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 30px;
+    background-color: rgba(0,0,0, .5);
+    /* border: 2px solid #000; */
+    /* padding-top: 30px; */
 }
 
 .sidenav a {
