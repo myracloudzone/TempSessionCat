@@ -88,12 +88,10 @@ export class SessionComponent implements OnInit {
       if (found) {
         this.state = 'closed';
         setTimeout(() => {
-        this.calSelectedDates = [];
-        this.calSelectedDates.push(tempDate1);
-        this.calSelectedDates.push(tempDate2);
-        this.calSelectedDates.push(tempDate3);
-        }, 300);
-        setTimeout(() => {
+          this.calSelectedDates = [];
+          this.calSelectedDates.push(tempDate1);
+          this.calSelectedDates.push(tempDate2);
+          this.calSelectedDates.push(tempDate3);
           this.state = 'open';
         }, 1000);
       }
