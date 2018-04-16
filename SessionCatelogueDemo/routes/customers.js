@@ -66,6 +66,7 @@ exports.list = function(req, res){
     } 
     console.log(query);
     req.getConnection(function(err,connection){
+        connection.query('use sessionsCat');
         var query1 = connection.query(query, function(err,rows) {
             if(err)
                 console.log("Error Selecting : %s ",err );
@@ -152,6 +153,7 @@ exports.list = function(req, res){
 
 exports.tags = function(req, res) {
   req.getConnection(function(err,connection) {
+        connection.query('use sessionsCat');
         var query = connection.query('SELECT * FROM Tag',function(err,rows) {
             if(err)
                 console.log("Error Selecting : %s ",err );
@@ -162,6 +164,7 @@ exports.tags = function(req, res) {
 
 exports.levels = function(req, res) {
   req.getConnection(function(err,connection) {
+       connection.query('use sessionsCat');
         var query = connection.query('SELECT * FROM Level',function(err,rows) {
             if(err)
                 console.log("Error Selecting : %s ",err );
@@ -171,6 +174,7 @@ exports.levels = function(req, res) {
 };
 exports.locations = function(req, res) {
   req.getConnection(function(err,connection) {
+       connection.query('use sessionsCat');
         var query = connection.query('SELECT * FROM Location',function(err,rows) {
             if(err)
                 console.log("Error Selecting : %s ",err );
@@ -180,6 +184,7 @@ exports.locations = function(req, res) {
 };
 exports.status = function(req, res) {
   req.getConnection(function(err,connection) {
+        connection.query('use sessionsCat');
         var query = connection.query('SELECT * FROM Status',function(err,rows) {
             if(err)
                 console.log("Error Selecting : %s ",err );
@@ -189,6 +194,7 @@ exports.status = function(req, res) {
 };
 exports.tracks = function(req, res) {
   req.getConnection(function(err,connection) {
+        connection.query('use sessionsCat');
         var query = connection.query('SELECT * FROM Track',function(err,rows) {
             if(err)
                 console.log("Error Selecting : %s ",err );
@@ -198,6 +204,7 @@ exports.tracks = function(req, res) {
 };
 exports.types = function(req, res) {
   req.getConnection(function(err,connection) {
+        connection.query('use sessionsCat');
         var query = connection.query('SELECT * FROM Type',function(err,rows) {
             if(err)
                 console.log("Error Selecting : %s ",err );
@@ -208,6 +215,7 @@ exports.types = function(req, res) {
 
 exports.speakerSesssion = function(req, res) {
   req.getConnection(function(err,connection) {
+        connection.query('use sessionsCat');
         var q = "select * from sessionsCat.session s inner join sessionsCat.Speaker_To_Session sts on (sts.sessionId = s.id) where sts.speakerId = "+req.query.speakerId;
         var query = connection.query(q,function(err,rows) {
             if(err)
@@ -218,6 +226,7 @@ exports.speakerSesssion = function(req, res) {
 };
 exports.distinctDates = function(req, res) {
   req.getConnection(function(err,connection) {
+        connection.query('use sessionsCat');
         var q = "SELECT distinct from_unixtime(startTime/1000,'%Y-%m-%d') as distinctDate from sessionsCat.session;";
         var query = connection.query(q,function(err,rows) {
             if(err)
@@ -239,6 +248,7 @@ exports.distinctDates = function(req, res) {
 };
 exports.distinctDatesForCalendar  = function(req, res) {
   req.getConnection(function(err,connection) {
+      connection.query('use sessionsCat');
         var q = "SELECT MIN(startTime) as minVal, MAX(startTime) as maxVal from sessionsCat.session;";
         var query = connection.query(q,function(err,rows) {
             if(err)
@@ -280,6 +290,7 @@ exports.getSessionsByTrackAndTime  = function(req, res) {
         console.log(startDateTime + "        " + endDateTime);
         var query = "select s.id, s.isFav, s.name, tg.id as tagId, tg.name as tagName, type.id as typeId, type.name as typeName, type.color as typeColor, s.code, startTime, endTime, duration, description, l.id as levelId, l.name as levelName, l.color as levelColor, lc.id as locationId, lc.name as locationName, lc.color as locationColor, st.id as statusId, st.name as statusName, st.color as statusColor, tr.name as trackName, tr.id  as trackId, tr.color as trackColor from sessionsCat.session s left join sessionsCat.Level l on l.id = s.sessionLevel  left join sessionsCat.Location lc on lc.id = s.sessionLocation left join   sessionsCat.Status st on st.id = s.sessionStatus  left join sessionsCat.Track tr on tr.id = s.sessionTrack left join sessionsCat.tag_to_session tts on tts.sessionId = s.id left join sessionsCat.Tag tg on tts.tagId = tg.id left join Type type on type.id = s.sessionType where 1=1 and startTime >= "+startDateTime+" and startTime < "+endDateTime+" and tr.id = "+req.query.trackId;
        console.log(query)
+        connection.query('use sessionsCat');
         var query1 = connection.query(query, function(err,rows) {
             if(err)
                 console.log("Error Selecting : %s ",err );
@@ -366,7 +377,7 @@ exports.setDates = function(req, res) {
   req.getConnection(function(err,connection) {
       var ids = [];
       var ldt = 1520902800000;
-      
+        connection.query('use sessionsCat');
       var query = connection.query('select id from sessionsCat.session',function(err,rows) {
             if(err)
                 console.log("Error Selecting : %s ",err );
